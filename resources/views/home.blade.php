@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 @media (max-width: 768px) {
     .hero-prev,
     .hero-next {
-        width: 40px !important;
+        width: 10px !important;
         height: 40px !important;
     }
     

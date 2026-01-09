@@ -66,34 +66,40 @@
                     </div>
                 </a>
 
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" 
-                       onclick="trackClick('navbar', 'Menu - Beranda');"
-                       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('home') ? 'text-maroon' : '' }}">
-                        Beranda
-                    </a>
-                    <a href="{{ route('about') }}" 
-                       onclick="trackClick('navbar', 'Menu - Tentang');"
-                       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('about') ? 'text-maroon' : '' }}">
-                        Tentang
-                    </a>
-                    <a href="{{ route('services') }}" 
-                       onclick="trackClick('navbar', 'Menu - Layanan');"
-                       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('services*') ? 'text-maroon' : '' }}">
-                        Layanan
-                    </a>
-                    <a href="{{ route('programs') }}" 
-                       onclick="trackClick('navbar', 'Menu - Program');"
-                       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('programs*') ? 'text-maroon' : '' }}">
-                        Program
-                    </a>
-                    <a href="{{ route('contact') }}" 
-                       onclick="trackClick('navbar', 'Menu - Hubungi Kami');"
-                       class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-medium">
-                        Hubungi Kami
-                    </a>
-                </div>
+                <!-- Desktop Menu - REPLACE EXISTING ONE -->
+<div class="hidden lg:flex items-center space-x-8">
+    <a href="{{ route('home') }}" 
+       onclick="trackClick('navbar', 'Menu - Beranda');"
+       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('home') ? 'text-maroon' : '' }}">
+        Beranda
+    </a>
+    <a href="{{ route('about') }}" 
+       onclick="trackClick('navbar', 'Menu - Tentang');"
+       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('about') ? 'text-maroon' : '' }}">
+        Tentang
+    </a>
+    <a href="{{ route('services') }}" 
+       onclick="trackClick('navbar', 'Menu - Layanan');"
+       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('services*') ? 'text-maroon' : '' }}">
+        Layanan
+    </a>
+    <a href="{{ route('programs') }}" 
+       onclick="trackClick('navbar', 'Menu - Program');"
+       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('programs*') ? 'text-maroon' : '' }}">
+        Program
+    </a>
+    <a href="{{ route('instructor') }}" 
+   onclick="trackClick('navbar', 'Menu - Instruktur');"
+   class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('instructor*') ? 'text-maroon' : '' }}">
+    Bergabung sebagai Instruktur
+</a>
+    
+    <a href="{{ route('contact') }}" 
+       onclick="trackClick('navbar', 'Menu - Hubungi Kami');"
+       class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-medium">
+        Hubungi Kami
+    </a>
+</div>
                 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition">
@@ -104,35 +110,41 @@
             </div>
             
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden pb-4">
-                <div class="flex flex-col space-y-3">
-                    <a href="{{ route('home') }}" 
-                       onclick="trackClick('navbar_mobile', 'Menu - Beranda');"
-                       class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('home') ? 'bg-gray-50 text-maroon' : '' }}">
-                        Beranda
-                    </a>
-                    <a href="{{ route('about') }}" 
-                       onclick="trackClick('navbar_mobile', 'Menu - Tentang');"
-                       class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('about') ? 'bg-gray-50 text-maroon' : '' }}">
-                        Tentang
-                    </a>
-                    <a href="{{ route('services') }}" 
-                       onclick="trackClick('navbar_mobile', 'Menu - Layanan');"
-                       class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('services*') ? 'bg-gray-50 text-maroon' : '' }}">
-                        Layanan
-                    </a>
-                    <a href="{{ route('programs') }}" 
-                       onclick="trackClick('navbar_mobile', 'Menu - Program');"
-                       class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('programs*') ? 'bg-gray-50 text-maroon' : '' }}">
-                        Program
-                    </a>
-                    <a href="{{ route('contact') }}" 
-                       onclick="trackClick('navbar_mobile', 'Menu - Hubungi Kami');"
-                       class="bg-maroon text-white px-4 py-2 rounded-lg hover:bg-maroon-dark transition font-medium text-center">
-                        Hubungi Kami
-                    </a>
-                </div>
-            </div>
+            <!-- Mobile Menu - REPLACE EXISTING ONE -->
+<div id="mobile-menu" class="hidden lg:hidden pb-4">
+    <div class="flex flex-col space-y-3">
+        <a href="{{ route('home') }}" 
+           onclick="trackClick('navbar_mobile', 'Menu - Beranda');"
+           class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('home') ? 'bg-gray-50 text-maroon' : '' }}">
+            Beranda
+        </a>
+        <a href="{{ route('about') }}" 
+           onclick="trackClick('navbar_mobile', 'Menu - Tentang');"
+           class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('about') ? 'bg-gray-50 text-maroon' : '' }}">
+            Tentang
+        </a>
+        <a href="{{ route('services') }}" 
+           onclick="trackClick('navbar_mobile', 'Menu - Layanan');"
+           class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('services*') ? 'bg-gray-50 text-maroon' : '' }}">
+            Layanan
+        </a>
+        <a href="{{ route('programs') }}" 
+           onclick="trackClick('navbar_mobile', 'Menu - Program');"
+           class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('programs*') ? 'bg-gray-50 text-maroon' : '' }}">
+            Program
+        </a>
+        <a href="{{ route('instructor') }}" 
+   onclick="trackClick('navbar_mobile', 'Menu - Instruktur');"
+   class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('instructor*') ? 'bg-gray-50 text-maroon' : '' }}">
+    Bergabung sebagai Instruktur
+</a>
+        <a href="{{ route('contact') }}" 
+           onclick="trackClick('navbar_mobile', 'Menu - Hubungi Kami');"
+           class="bg-maroon text-white px-4 py-2 rounded-lg hover:bg-maroon-dark transition font-medium text-center">
+            Hubungi Kami
+        </a>
+    </div>
+</div>
         </div>
     </nav>
     

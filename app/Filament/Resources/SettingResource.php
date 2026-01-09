@@ -47,6 +47,40 @@ class SettingResource extends Resource
                             ->rows(5)
                             ->columnSpanFull(),
                     ]),
+                    Forms\Components\Section::make('Pengaturan')
+                ->schema([
+                    Forms\Components\TextInput::make('key')
+                        ->label('Key/Kunci')
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->helperText('Contoh: site_name, phone, email, address')
+                        ->maxLength(255),
+                    
+                    Forms\Components\Select::make('type')
+                        ->label('Tipe Data')
+                        ->options([
+                            'text' => 'Text',
+                            'textarea' => 'Textarea',
+                            'image' => 'Image',
+                            'url' => 'URL',
+                            'boolean' => 'Boolean (On/Off)',
+                        ])
+                        ->required()
+                        ->reactive(),
+                    
+                    Forms\Components\Textarea::make('value')
+                        ->label('Nilai')
+                        ->rows(5)
+                        ->columnSpanFull()
+                        ->visible(fn ($get) => $get('type') !== 'boolean'),
+                    
+                    Forms\Components\Toggle::make('value')
+                        ->label('Nilai')
+                        ->visible(fn ($get) => $get('type') === 'boolean')
+                        ->formatStateUsing(fn ($state) => $state === '1' || $state === 'true' || $state === true)
+                        ->dehydrateStateUsing(fn ($state) => $state ? '1' : '0'),
+                ])
+                ->columnSpanFull(),
             ]);
     }
 
