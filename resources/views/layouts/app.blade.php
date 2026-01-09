@@ -169,7 +169,8 @@
                         </div>
                     </a>
                     <p class="text-gray-300 text-sm mb-4">
-                        PT Sinarta Multi Jasa Sertifikasi - Penyedia layanan pelatihan dan sertifikasi terpercaya.
+                        <b>PT Sinarta Multi Jasa Sertifikasi</b>
+                    adalah perusahaan pelatihan dan sertifikasi SDM, berfokus pada pembinaan dan sertifikasi K3. Berdiri sejak 2022 dan berizin resmi Kementerian Ketenagakerjaan RI (SKP No.5/1309/AS.01.02/XI/2024), Sinarta berpengalaman melahirkan Ahli K3 Umum bersertifikat Kemnaker.
                     </p>
                 </div>
                 
@@ -228,7 +229,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
-                            <span class="text-gray-300">Bontang, Kalimantan Timur</span>
+                            <span class="text-gray-300">Jl. Cipto Mangunkusumo, Belimbing, Kec. Bontang Barat, Kota Bontang, Kalimantan Timur 75313</span>
                         </li>
                         <li class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
