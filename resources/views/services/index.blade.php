@@ -8,7 +8,7 @@
         <div class="max-w-3xl mx-auto text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Layanan Kami</h1>
             <p class="text-xl text-gray-200">
-                Solusi lengkap untuk pelatihan dan sertifikasi K3 Anda
+                Layanan pelatihan dan sertifikasi K3 berizin resmi untuk meningkatkan <br> kompetensi dan keselamatan kerja.
             </p>
         </div>
     </div>

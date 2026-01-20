@@ -41,7 +41,7 @@
             </div>
             
             <div class="relative">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" 
+                <img src="{{ asset('images/about_photo.jpg') }}"
                      alt="Tim SinartaMJS" 
                      class="rounded-2xl shadow-2xl">
                 <div class="absolute -bottom-6 -left-6 bg-maroon text-white p-8 rounded-xl shadow-xl">
