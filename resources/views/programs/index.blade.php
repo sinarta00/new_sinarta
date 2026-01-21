@@ -120,7 +120,7 @@
                             </div>
                             @endif
                             
-                            <a href="https://wa.me/6281234567890?text=Halo, saya ingin mendaftar program {{ $program->title }}" 
+                             <a href="{{ $program->registration_link }}"
                                target="_blank"
                                onclick="trackClick('program_list', 'Daftar Button - {{ $program->title }}');"
                                class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
