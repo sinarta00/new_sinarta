@@ -16,6 +16,7 @@ class InstructorApplication extends Model
         'whatsapp',
         'email',
         'expertise_fields',
+        'diploma_file',
         'other_expertise',
         'cv_path',
         'certificate_paths',

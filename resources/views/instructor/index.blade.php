@@ -484,6 +484,25 @@ document.addEventListener("DOMContentLoaded", function() {
                             @enderror
                         </div>
 
+                        <!-- TAMBAHAN INPUT IJAZAH -->
+                        <div>
+                            <label for="diploma_file" class="block text-sm font-semibold text-gray-900 mb-2">
+                                Ijazah Terakhir (PDF/JPG/PNG) <span class="text-red-500">*</span>
+                            </label>
+                            <input 
+                                type="file" 
+                                class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-maroon transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-maroon file:text-white file:text-sm file:font-medium hover:file:bg-maroon-dark cursor-pointer" 
+                                id="diploma_file" 
+                                name="diploma_file" 
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                required
+                            >
+                            <small class="form-text text-muted">Format: PDF/JPG/PNG, Maksimal 5MB</small>
+                            @error('diploma_file')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <!-- Sertifikat Multiple -->
                         <div>
                             <label for="certificate_files" class="block text-sm font-semibold text-gray-900 mb-2">

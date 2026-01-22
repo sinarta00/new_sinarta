@@ -162,6 +162,12 @@ class InstructorApplicationResource extends Resource
                             ->url(fn ($record) => $record->cv_path ? Storage::url($record->cv_path) : null)
                             ->openUrlInNewTab()
                             ->color('primary'),
+                        TextEntry::make('diploma_file')
+                            ->label('Ijazah')
+                            ->formatStateUsing(fn () => 'Download Ijazah')
+                            ->url(fn ($record) => $record->diploma_file ? Storage::url($record->diploma_file) : null)
+                            ->openUrlInNewTab()
+                            ->color('primary'),
                         TextEntry::make('certificate_paths')
                             ->label('Sertifikat')
                             ->listWithLineBreaks()

@@ -37,17 +37,18 @@ class InstructorController extends Controller
 
     public function store(InstructorApplicationRequest $request)
     {
+        // dd($request->all());
         // Verify reCAPTCHA
-        $recaptchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->recaptcha_token,
-        ]);
+        // $recaptchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        //     'secret' => env('RECAPTCHA_SECRET_KEY'),
+        //     'response' => $request->recaptcha_token,
+        // ]);
 
-        $recaptchaResult = $recaptchaResponse->json();
+        // $recaptchaResult = $recaptchaResponse->json();
 
-        if (!$recaptchaResult['success'] || $recaptchaResult['score'] < 0.5) {
-            return back()->withErrors(['recaptcha' => 'Verifikasi reCAPTCHA gagal. Silakan coba lagi.'])->withInput();
-        }
+        // if (!$recaptchaResult['success'] || $recaptchaResult['score'] < 0.5) {
+        //     return back()->withErrors(['recaptcha' => 'Verifikasi reCAPTCHA gagal. Silakan coba lagi.'])->withInput();
+        // }
 
         // Prepare data
         $data = $request->except(['cv_file', 'certificate_files', 'recaptcha_token']);
@@ -55,6 +56,12 @@ class InstructorController extends Controller
         // Upload CV
         if ($request->hasFile('cv_file')) {
             $data['cv_path'] = $request->file('cv_file')->store('instructor-applications/cv', 'public');
+        }
+
+        // Simpan file
+        if ($request->hasFile('diploma_file')) {
+            $data['diploma_file'] = $request->file('diploma_file')->store('instructor-applications/ijazah', 'public');
+            // Simpan $diplomaPath ke database
         }
 
         // Upload Multiple Certificates
