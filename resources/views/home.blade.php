@@ -7,7 +7,7 @@
      class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 opacity-0" 
      style="display: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
 
-    <div class="bg-white rounded-2xl max-w-2xl w-full relative animate-fade-in-up shadow-2xl overflow-hidden">
+    <div class="bg-white rounded-2xl max-w-2xl w-full relative animate-fade-in-up shadow-2xl ">
         
         <!-- Tombol Close -->
         <button onclick="closePopup()" 
@@ -22,7 +22,7 @@
         <div class="relative">
             @if($popup->link)
                 <a href="{{ $popup->link }}" target="{{ $popup->open_new_tab ? '_blank' : '_self' }}" class="block">
-                    <div class="w-full max-h-[70vh] overflow-hidden rounded-t-2xl">
+                    <div class="w-full max-h-[70vh] overflow-hidden rounded-t-2xl overflow-hidden">
                         <img src="{{ Storage::url($popup->image) }}" 
                              alt="{{ $popup->title }}" 
                              class="w-full h-auto object-contain cursor-pointer hover:opacity-95 transition">
@@ -36,7 +36,7 @@
                 </div>
             @endif
             
-            @if($popup->description)
+            {{-- @if($popup->description)
             <div class="p-6">
                 <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $popup->title }}</h3>
                 <p class="text-gray-600">{{ $popup->description }}</p>
@@ -49,11 +49,11 @@
                 </a>
                 @endif
             </div>
-            @endif
+            @endif --}}
         </div>
         
         <!-- Checkbox Jangan tampilkan lagi -->
-        <div class="px-6 pb-6">
+        <div class="py-3 px-6">
             <label class="flex items-center cursor-pointer">
                 <input type="checkbox" id="dontShowAgain" class="w-4 h-4 text-maroon border-gray-300 rounded focus:ring-maroon">
                 <span class="ml-2 text-sm text-gray-600">Jangan tampilkan lagi hari ini</span>
