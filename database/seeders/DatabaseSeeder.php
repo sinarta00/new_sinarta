@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             // ProgramSeeder::class,
             // TestimonialSeeder::class,
             // PartnerSeeder::class,
+            InstructorPageContentSeeder::class,
             PopupSeeder::class,
         ]);
     }
