@@ -51,7 +51,7 @@ class InstructorController extends Controller
         }
 
         // Prepare data
-        $data = $request->except(['cv_file', 'certificate_files', 'recaptcha_token']);
+        $data = $request->except(['cv_file', 'certificate_files', 'diploma_file', 'recaptcha_token']);
 
         // Upload CV
         if ($request->hasFile('cv_file')) {

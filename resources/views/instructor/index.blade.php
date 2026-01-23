@@ -487,7 +487,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <!-- TAMBAHAN INPUT IJAZAH -->
                         <div>
                             <label for="diploma_file" class="block text-sm font-semibold text-gray-900 mb-2">
-                                Ijazah Terakhir (PDF/JPG/PNG) <span class="text-red-500">*</span>
+                                Ijazah Terakhir (PDF) <span class="text-red-500">*</span>
                             </label>
                             <input 
                                 type="file" 
