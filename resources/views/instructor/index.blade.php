@@ -403,14 +403,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="space-y-2 md:space-y-3">
                             @php
                             $expertiseFields = [
-                                'K3 Pesawat Uap dan Bejana Tekan',
-                                'K3 Mekanik',
-                                'K3 Listrik',
-                                'K3 Kebakaran',
-                                'K3 Bahan Berbahaya',
-                                'K3 Lingkungan Kerja',
+                                'K3 Pesawat Uap, Bejana Tekanan, dan Tangki Timbun',
+                                'K3 PTP (Mekanik) dan K3 PAA (Elavator dan Arsitektur)',
+                                'K3 Listrik dan Penyalur Petir',
+                                'K3 Penanggulangan Kebakaran',
+                                'K3 Konstruksi dan Bangunan',
+                                'K3 Ergonomi dan Lingkungan Kerja',
                                 'K3 Kesehatan Kerja dan Pelayanan Kesehatan Kerja',
-                                'Manajemen Risiko',
+                                'Manajemen Risiko, Analisa Kecelakaan, dan Laporan Kecelakaan Kerja',
                                 'Analisa Kecelakaan & Laporan Kecelakaan Kerja',
                                 'SMK3',
                                 'K3 Pertambangan',
@@ -552,6 +552,22 @@ document.addEventListener("DOMContentLoaded", function() {
                                        class="flex-shrink-0">
                                 <span class="ml-3 text-sm md:text-base text-gray-700 font-medium group-hover:text-maroon transition">Weekend</span>
                             </label>
+                            <label class="flex items-center px-6 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-maroon hover:bg-gray-50 cursor-pointer transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <input type="checkbox"
+                                       name="availability_time[]"
+                                       value="malam"
+                                       {{ is_array(old('availability_time')) && in_array('malam', old('availability_time')) ? 'checked' : '' }}
+                                       class="flex-shrink-0">
+                                <span class="ml-3 text-sm md:text-base text-gray-700 font-medium group-hover:text-maroon transition">Malam</span>
+                            </label>
+                            <label class="flex items-center px-6 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-maroon hover:bg-gray-50 cursor-pointer transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <input type="checkbox"
+                                       name="availability_time[]"
+                                       value="jam_kerja"
+                                       {{ is_array(old('availability_time')) && in_array('jam_kerja', old('availability_time')) ? 'checked' : '' }}
+                                       class="flex-shrink-0">
+                                <span class="ml-3 text-sm md:text-base text-gray-700 font-medium group-hover:text-maroon transition">Jam Kerja (08.00 - 17.00)</span>
+                            </label>
                         </div>
                         @error('availability_time')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -615,6 +631,40 @@ document.addEventListener("DOMContentLoaded", function() {
                         @enderror
                     </div>
                 </div>
+
+                <!-- Usulan Kegiatan dan Materi -->
+                <div class="mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 flex items-center">
+                        <div class="w-8 h-8 md:w-10 md:h-10 bg-maroon rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-sm md:text-base">6</span>
+                        </div>
+                        Usulan Kegiatan dan Materi
+                    </h3>
+                    
+                    <div>
+                        <label for="usulan_kegiatan_dan_materi" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Jelaskan usulan kegiatan dan materi yang ingin Anda sampaikan <span class="text-red-500">*</span>
+                        </label>
+
+                        <textarea
+                            id="usulan_kegiatan_dan_materi"
+                            name="usulan_kegiatan_dan_materi"
+                            rows="6"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-transparent transition text-sm md:text-base"
+                            placeholder="Tuliskan gambaran kegiatan, Seminar, Pelatihan Internal, Workshop, Sosialisasi, lainnya..."
+                        >{{ old('usulan_kegiatan_dan_materi') }}</textarea>
+
+                        <p class="text-xs md:text-sm text-gray-500 mt-2">
+                            Maksimal 2000 karakter
+                        </p>
+
+                        @error('usulan_kegiatan_dan_materi')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
 
                 <!-- Submit Button -->
                 <div class="border-t pt-6 md:pt-8">

@@ -27,6 +27,7 @@ class InstructorApplication extends Model
         'admin_notes',
         'ip_address',
         'user_agent',
+        'usulan_kegiatan_dan_materi',
     ];
 
     protected $casts = [

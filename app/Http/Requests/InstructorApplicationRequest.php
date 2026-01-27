@@ -28,12 +28,13 @@ class InstructorApplicationRequest extends FormRequest
             'certificate_files.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
             
             'availability_time' => 'required|array|min:1',
-            'availability_time.*' => 'string|in:weekday,weekend',
+            'availability_time.*' => 'string|in:weekday,weekend,malam,jam_kerja',
             
             'availability_programs' => 'required|array|min:1',
             'availability_programs.*' => 'string',
             
             'motivation' => 'required|string|max:2000',
+            'usulan_kegiatan_dan_materi' => 'required|string|max:2000',
             
             'recaptcha_token' => 'required',
         ];
@@ -53,6 +54,7 @@ class InstructorApplicationRequest extends FormRequest
             'availability_time' => 'kesediaan waktu',
             'availability_programs' => 'program yang diminati',
             'motivation' => 'motivasi',
+            'usulan_kegiatan_dan_materi' => 'usulan kegiatan dan materi'
         ];
     }
 
@@ -66,6 +68,7 @@ class InstructorApplicationRequest extends FormRequest
             'min' => ':attribute minimal :min pilihan.',
             'mimes' => ':attribute harus berupa file :values.',
             'file.max' => 'Ukuran :attribute maksimal 5MB.',
+            'usulan_kegiatan_dan_materi.required' => 'Usulan kegiatan dan materi wajib diisi.',
         ];
     }
 }
