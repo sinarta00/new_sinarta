@@ -39,16 +39,16 @@ class InstructorController extends Controller
     {
         // dd($request->all());
         // Verify reCAPTCHA
-        // $recaptchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-        //     'secret' => env('RECAPTCHA_SECRET_KEY'),
-        //     'response' => $request->recaptcha_token,
-        // ]);
+        $recaptchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->recaptcha_token,
+        ]);
 
-        // $recaptchaResult = $recaptchaResponse->json();
+        $recaptchaResult = $recaptchaResponse->json();
 
-        // if (!$recaptchaResult['success'] || $recaptchaResult['score'] < 0.5) {
-        //     return back()->withErrors(['recaptcha' => 'Verifikasi reCAPTCHA gagal. Silakan coba lagi.'])->withInput();
-        // }
+        if (!$recaptchaResult['success'] || $recaptchaResult['score'] < 0.5) {
+            return back()->withErrors(['recaptcha' => 'Verifikasi reCAPTCHA gagal. Silakan coba lagi.'])->withInput();
+        }
 
         // Prepare data
         $data = $request->except(['cv_file', 'certificate_files', 'diploma_file', 'recaptcha_token']);
