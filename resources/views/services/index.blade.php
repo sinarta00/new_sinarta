@@ -42,7 +42,7 @@
                             {{ $service->description }}
                         </p>
                         
-                        <a href="https://wa.me/6281234567890?text=Halo, saya ingin bertanya tentang {{ $service->title }}" 
+                        <a href="https://wa.me/6281351813731?text=Halo, saya ingin bertanya tentang {{ $service->title }}" 
                            target="_blank"
                            onclick="trackClick('service_detail', 'Tanya Sekarang - {{ $service->title }}');"
                            class="inline-flex items-center text-maroon font-semibold hover:text-yellow transition">
