@@ -72,7 +72,15 @@ class ProgramResource extends Resource
                             ->numeric()
                             ->prefix('Rp')
                             ->helperText('Kosongkan jika tidak ingin menampilkan harga'),
-                    ]),
+                        Forms\Components\TextInput::make('discount')
+                        ->label('Diskon (%)')
+                        ->numeric()
+                        ->minValue(0)
+                        ->maxValue(100)
+                        ->suffix('%')
+                        ->helperText('Isi jika ada diskon. Contoh: 20 untuk diskon 20%')
+                        ->nullable(),
+                    ])->columns(2),
 
                 Forms\Components\Section::make('Link Pendaftaran')
                     ->schema([
@@ -136,6 +144,12 @@ class ProgramResource extends Resource
                     ->label('Harga')
                     ->money('IDR')
                     ->sortable(),
+                
+                Tables\Columns\TextColumn::make('discount')
+                ->label('Diskon')
+                ->suffix('%')
+                ->color('danger')
+                ->sortable(),
 
                 Tables\Columns\IconColumn::make('registration_link')
                     ->label('Link Daftar')

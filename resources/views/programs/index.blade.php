@@ -62,12 +62,11 @@
 
 <!-- Programs Grid -->
 <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">  
         @if($programs->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($programs as $program)
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group">
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group flex flex-col h-full">
                     <div class="relative h-48 overflow-hidden">
                         @if($program->image)
                             <img src="{{ Storage::url($program->image) }}" 
@@ -89,14 +88,15 @@
                         </div>
                     </div>
                     
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-1 justify-between">
+                        
                         <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $program->title }}</h3>
                         
-                        <div class="text-gray-600 text-sm mb-4 line-clamp-3">
+                        <div class="text-gray-600 text-sm mb-4 line-clamp-3 min-h-[200px]">
                             {!! Str::limit(strip_tags($program->description), 120) !!}
                         </div>
                         
-                        <div class="space-y-2 mb-6">
+                        <div class="space-y-2 mb-2">
                             @if($program->duration)
                             <div class="flex items-center text-sm text-gray-600">
                                 <svg class="w-5 h-5 text-maroon mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,27 +106,47 @@
                             </div>
                             @endif
                         </div>
-                        
-                        <div class="flex items-center justify-between">
+
+                        <div class="flex items-center justify-between mt-auto pt-4">
                             @if($program->price)
-                            <div>
-                                <div class="text-sm text-gray-500">Mulai dari</div>
-                                <div class="text-2xl font-bold text-maroon">Rp {{ number_format($program->price, 0, ',', '.') }}</div>
-                            </div>
+
+                                <div class="flex flex-col justify-end min-h-[70px]">
+                                    <div class="text-sm text-black-500 font-bold">Harga</div>
+
+                                    @if($program->discount && $program->discount > 0)
+                                        {{-- Harga Asli Dicoret --}}
+                                        <div class="text-xs text-gray-400" style="text-decoration: line-through;">
+                                            Rp {{ number_format($program->price, 0, ',', '.') }}
+                                        </div>
+
+                                        {{-- Harga Setelah Diskon --}}
+                                        <div class="text-2xl font-bold text-maroon">
+                                            Rp {{ number_format($program->final_price, 0, ',', '.') }}
+                                        </div>
+
+                                    @else
+                                        {{-- Harga Normal --}}
+                                        <div class="text-2xl font-bold text-maroon">
+                                            Rp {{ number_format($program->price, 0, ',', '.') }}
+                                        </div>
+                                    @endif
+                                </div>
+
                             @else
-                            <div>
-                                <div class="text-sm text-gray-500">Hubungi kami untuk</div>
-                                <div class="text-lg font-bold text-maroon">Info Harga</div>
-                            </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">Hubungi kami untuk</div>
+                                    <div class="text-lg font-bold text-maroon">Info Harga</div>
+                                </div>
                             @endif
-                            
-                             <a href="{{ $program->registration_link }}"
-                               target="_blank"
-                               onclick="trackClick('program_list', 'Daftar Button - {{ $program->title }}');"
-                               class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
+
+                            <a href="{{ $program->registration_link }}"
+                            target="_blank"
+                            onclick="trackClick('program_list', 'Daftar Button - {{ $program->title }}');"
+                            class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
                                 Daftar
                             </a>
                         </div>
+
                     </div>
                 </div>
                 @endforeach

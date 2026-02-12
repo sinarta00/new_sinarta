@@ -15,6 +15,7 @@ class Program extends Model
         'features',
         'duration',
         'price',
+        'discount',
         'image',
         'registration_link',
         'category',
@@ -26,4 +27,14 @@ class Program extends Model
         'is_active' => 'boolean',
         'price' => 'decimal:2',
     ];
+
+    public function getFinalPriceAttribute()
+    {
+        if (!$this->discount || !$this->price) {
+            return $this->price;
+        }
+
+        return $this->price - ($this->price * $this->discount / 100);
+    }
+
 }
