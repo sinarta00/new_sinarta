@@ -146,7 +146,7 @@
                                     <a href="{{ asset('storage/' . $program->pdf_file) }}"
                                         target="_blank"
                                         class="border border-maroon text-maroon px-4 py-2 rounded-lg hover:bg-maroon hover:text-white transition font-semibold text-sm">
-                                        Lihat Proposal
+                                        Proposal
                                     </a>
                                 @endif
 
