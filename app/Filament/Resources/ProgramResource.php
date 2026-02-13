@@ -63,6 +63,15 @@ class ProgramResource extends Resource
                             ->directory('programs')
                             ->maxSize(2048)
                             ->columnSpanFull(),
+                        
+                        Forms\Components\FileUpload::make('pdf_file')
+                            ->label('Proposal (PDF)')
+                             ->acceptedFileTypes(['application/pdf'])
+                            ->directory('program-pdfs')
+                            ->maxSize(15000) // 5MB
+                            ->downloadable()
+                            ->previewable(false)
+                            ->nullable(),
                     ]),
                 
                 Forms\Components\Section::make('Harga & Kuota')

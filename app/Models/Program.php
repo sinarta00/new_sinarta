@@ -21,6 +21,7 @@ class Program extends Model
         'category',
         'is_active',
         'order',
+        'pdf_file'
     ];
 
     protected $casts = [

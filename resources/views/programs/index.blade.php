@@ -88,8 +88,7 @@
                         </div>
                     </div>
                     
-                    <div class="p-6 flex flex-col flex-1 justify-between">
-                        
+                    <div class="p-6 flex flex-col flex-1 justify-between w-full">  
                         <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $program->title }}</h3>
                         
                         <div class="text-gray-600 text-sm mb-4 line-clamp-3 min-h-[200px]">
@@ -107,7 +106,7 @@
                             @endif
                         </div>
 
-                        <div class="flex items-center justify-between mt-auto pt-4">
+                        <div class="flex items-center justify-between mt-auto">
                             @if($program->price)
 
                                 <div class="flex flex-col justify-end min-h-[70px]">
@@ -139,14 +138,26 @@
                                 </div>
                             @endif
 
-                            <a href="{{ $program->registration_link }}"
-                            target="_blank"
-                            onclick="trackClick('program_list', 'Daftar Button - {{ $program->title }}');"
-                            class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
-                                Daftar
-                            </a>
                         </div>
 
+                        <div class="flex gap-2 mt-2" style="justify-content: end;">
+                                {{-- Tombol Lihat PDF --}}
+                                @if($program->pdf_file)
+                                    <a href="{{ asset('storage/' . $program->pdf_file) }}"
+                                        target="_blank"
+                                        class="border border-maroon text-maroon px-4 py-2 rounded-lg hover:bg-maroon hover:text-white transition font-semibold text-sm">
+                                        Lihat Brosur
+                                    </a>
+                                @endif
+
+                                {{-- Tombol Daftar --}}
+                                <a href="{{ $program->registration_link }}"
+                                    target="_blank"
+                                    onclick="trackClick('program_list', 'Daftar Button - {{ $program->title }}');"
+                                    class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
+                                    Daftar
+                                </a>
+                        </div>
                     </div>
                 </div>
                 @endforeach
