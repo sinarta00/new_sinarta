@@ -44,10 +44,6 @@
                 <img src="{{ asset('images/about_photo.jpg') }}"
                      alt="Tim SinartaMJS" 
                      class="rounded-2xl shadow-2xl">
-                <div class="absolute -bottom-6 -left-6 bg-maroon text-white p-8 rounded-xl shadow-xl">
-                    <div class="text-4xl font-bold text-yellow">5+</div>
-                    <div class="text-sm">Tahun Pengalaman</div>
-                </div>
             </div>
         </div>
     </div>
@@ -174,7 +170,7 @@
             </div>
             
             <div class="bg-white rounded-2xl p-8 shadow-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-yellow rounded-lg flex items-center justify-center">
@@ -202,21 +198,6 @@
                             <p class="text-sm text-gray-600">Lembaga Sertifikasi Profesi (LSP) terakreditasi</p>
                         </div>
                     </div>
-                    
-                    <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-yellow rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-1">ISO 9001:2015</h4>
-                            <p class="text-sm text-gray-600">Sistem Manajemen Mutu tersertifikasi</p>
-                        </div>
-                    </div>
-                    
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-yellow rounded-lg flex items-center justify-center">

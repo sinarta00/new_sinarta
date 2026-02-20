@@ -165,7 +165,7 @@
                     <a href="{{ route('home') }}" 
                        onclick="trackClick('footer', 'Logo Click');"
                        class="flex items-center space-x-3 mb-4">
-                        <div class="flex items-center">
+                        <div class="flex items-cente bg-white py-2 px-4">
                             <img src="{{ asset('images/logo.png') }}" 
                                  alt="Logo SinartaMJS" 
                                  class="h-10 w-auto object-contain">
