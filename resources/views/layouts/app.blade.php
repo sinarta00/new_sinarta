@@ -165,10 +165,10 @@
                     <a href="{{ route('home') }}" 
                        onclick="trackClick('footer', 'Logo Click');"
                        class="flex items-center space-x-3 mb-4">
-                        <div class="flex items-cente bg-white py-2 px-4">
-                            <img src="{{ asset('images/logo.png') }}" 
+                        <div class="flex items-cente">
+                            <img src="{{ asset('images/logo_sinarta_putih.png') }}" 
                                  alt="Logo SinartaMJS" 
-                                 class="h-10 w-auto object-contain">
+                                 class="h-20 w-30 object-contain">
                         </div>
                     </a>
                     <p class="text-gray-300 text-sm mb-4">
@@ -331,6 +331,6 @@
             });
         });
     </script>
-    
+    @stack('scripts')
 </body>
 </html>

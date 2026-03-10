@@ -21,7 +21,7 @@ class ProgramPageController extends Controller
             $query->where('title', 'like', '%' . $request->search . '%');
         }
         
-        $programs = $query->orderBy('order')->paginate(9);
+        $programs = $query->orderBy('order')->with('nearestSchedules')->paginate(9);
         
         return view('programs.index', compact('programs'));
     }

@@ -66,8 +66,8 @@
         @if($programs->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($programs as $program)
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group flex flex-col h-full">
-                    <div class="relative h-48 overflow-hidden">
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition group flex flex-col h-full">
+                    <div class="relative h-48 overflow-hidden rounded-t-xl">
                         @if($program->image)
                             <img src="{{ Storage::url($program->image) }}" 
                                  alt="{{ $program->title }}" 
@@ -139,6 +139,68 @@
                             @endif
 
                         </div>
+
+                            <div class="relative schedule-wrap mt-3 mb-2 z-50">
+                                <button onclick="toggleSchedule(this)"
+                                    class="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 hover:border-maroon hover:bg-red-50 transition">
+
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-maroon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+
+                                        <span class="text-sm font-semibold text-gray-700">
+                                            Jadwal Terdekat
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <span class="bg-maroon text-white text-xs font-bold px-2 py-1 rounded-full">
+                                            {{ $program->nearestSchedules->count() }} Jadwal
+                                        </span>
+
+                                        <span class="text-gray-400 text-sm arrow-icon transition-transform duration-200">
+                                            ▲
+                                        </span>
+                                    </div>
+
+                                </button>
+                                <div class="schedule-popup hidden absolute -top-2 translate-y-[-100%] left-0 right-0 mb-1 bg-white border border-red-100 rounded-xl shadow-xl z-50 px-3 py-2 mb-3">
+                                    <div class="absolute -top-1.5 left-5 w-3 h-3 bg-white border-l border-t border-red-100 rotate-45"></div>
+                                    <p class="text-xs font-bold text-maroon uppercase tracking-wide mb-2">Jadwal Terdekat</p>
+                                    <div class="space-y-2">
+                                        
+                                         @if($program->nearestSchedules->isEmpty())
+                                            <div class="text-center py-3">
+                                                <p class="text-xs text-gray-400">Belum ada jadwal tersedia</p>
+                                            </div>
+                                        @else
+
+                                        @foreach($program->nearestSchedules as $schedule)
+                                        <div class="flex items-center justify-between py-1.5 {{ !$loop->last ? 'border-b border-dashed border-red-100' : '' }}">
+                                            <div>
+                                                <div class="text-xs font-semibold text-gray-800">
+                                                    {{ $schedule->start_date->format('d M Y') }}
+                                                    @if($schedule->start_date->ne($schedule->end_date))
+                                                        – {{ $schedule->end_date->format('d M Y') }}
+                                                    @endif
+                                                </div>
+                                                <div class="text-xs text-gray-500">
+                                                    {{ $schedule->city }}
+                                                    @if($schedule->location)· {{ $schedule->location }}@endif
+                                                </div>
+                                            </div>
+                                            <span class="text-xs font-bold px-2 py-0.5 rounded-md flex-shrink-0 ml-2
+                                                {{ $schedule->status === 'Tersedia' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-600' }}">
+                                                {{ $schedule->status }}
+                                            </span>
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
 
                         <div class="flex gap-2 mt-2" style="justify-content: end;">
                                 {{-- Tombol Lihat PDF --}}
@@ -324,3 +386,29 @@
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+    function toggleSchedule(btn) {
+        const wrap = btn.closest('.schedule-wrap');
+        const popup = wrap.querySelector('.schedule-popup');
+        const arrow = btn.querySelector('.arrow-icon');
+        const isOpen = !popup.classList.contains('hidden');
+
+        document.querySelectorAll('.schedule-popup').forEach(p => p.classList.add('hidden'));
+        document.querySelectorAll('.arrow-icon').forEach(a => a.style.transform = '');
+
+        if (!isOpen) {
+            popup.classList.remove('hidden');
+            arrow.style.transform = 'rotate(180deg)';
+        }
+    }
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.schedule-wrap')) {
+            document.querySelectorAll('.schedule-popup').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.arrow-icon').forEach(a => a.style.transform = '');
+        }
+    });
+</script>
+@endpush
