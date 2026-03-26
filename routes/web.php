@@ -7,6 +7,8 @@ use App\Http\Controllers\ServicePageController;
 use App\Http\Controllers\ProgramPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\AlumniController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
@@ -19,6 +21,10 @@ Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store
 // Instructor Routes
 Route::get('/bergabung-sebagai-instruktur', [InstructorController::class, 'index'])->name('instructor');
 Route::post('/bergabung-sebagai-instruktur', [InstructorController::class, 'store'])->name('instructor.store');
+
+Route::get('/form-alumni',        [AlumniController::class, 'showForm'])->name('alumni.form');
+Route::post('/form-alumni',       [AlumniController::class, 'submitForm'])->name('alumni.submit');
+Route::get('/form-alumni/sukses', [AlumniController::class, 'success'])->name('alumni.success');
 
 use App\Helpers\AnalyticsHelper;
 
