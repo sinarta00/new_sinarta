@@ -242,7 +242,7 @@
                 {{-- Upload Foto Sedang Bekerja --}}
                 <div>
                     <label for="work_photo" class="block text-sm font-semibold text-slate-700 mb-1.5">
-                        Foto diri (mengenakan seragam)
+                        Foto diri (mengenakan seragam kerja)
                         <span class="text-slate-400 font-normal text-xs">(opsional)</span>
                     </label>
                     <div id="photo_dropzone"
