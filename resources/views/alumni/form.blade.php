@@ -202,20 +202,20 @@
                 {{-- Status SKP --}}
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-2">
-                        Apakah sudah memiliki SKP? <span class="text-red-500">*</span>
+                        Apakah sudah memiliki SKP & Lisensi? <span class="text-red-500">*</span>
                     </label>
                     <div class="flex gap-3">
                         <label class="radio-option flex-1 flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer transition-all hover:border-red-300 has-[:checked]:border-red-700 has-[:checked]:bg-red-50">
                             <input type="radio" name="has_skp" value="1" id="has_skp_yes" class="accent-red-700"
                                 {{ old('has_skp') === '1' ? 'checked' : '' }}
                                 onchange="toggleSkpDate(this)">
-                            <span class="text-sm text-slate-700 font-medium">Punya SKP</span>
+                            <span class="text-sm text-slate-700 font-medium">Punya SKP & Lisensi</span>
                         </label>
                         <label class="radio-option flex-1 flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer transition-all hover:border-red-300 has-[:checked]:border-red-700 has-[:checked]:bg-red-50">
                             <input type="radio" name="has_skp" value="0" id="has_skp_no" class="accent-red-700"
                                 {{ old('has_skp', '0') === '0' ? 'checked' : '' }}
                                 onchange="toggleSkpDate(this)">
-                            <span class="text-sm text-slate-700 font-medium">Belum Punya SKP</span>
+                            <span class="text-sm text-slate-700 font-medium">Belum Punya SKP & Lisensi</span>
                         </label>
                     </div>
                     @error('has_skp')
