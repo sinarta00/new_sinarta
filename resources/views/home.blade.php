@@ -771,106 +771,169 @@ document.addEventListener('DOMContentLoaded', function() {
                 Pengalaman peserta yang telah mengikuti program pelatihan kami
             </p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse($testimonials as $testimonial)
-            <!-- Testimonial Card -->
-            <div class="bg-white rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                    @if($testimonial->avatar)
-                        <img src="{{ Storage::url($testimonial->avatar) }}" alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full object-cover">
-                    @else
-                        <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">
-                            {{ strtoupper(substr($testimonial->name, 0, 2)) }}
+
+        <!-- Slider Wrapper -->
+        <div class="relative flex items-center gap-4">
+
+            <!-- Tombol Kiri -->
+            <button id="testi-prev" class="flex-shrink-0 w-14 h-14 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            <!-- Overflow Container -->
+            <div class="overflow-hidden flex-1">
+                <div id="testi-track" class="flex transition-transform duration-500 ease-in-out" style="will-change: transform;">
+
+                    @forelse($testimonials as $testimonial)
+                    <div class="testi-slide flex-shrink-0 px-3" style="width: 33.3333%;">
+                        <div class="bg-white rounded-xl p-6 shadow-lg h-full">
+                            <div class="flex items-center mb-4">
+                                @if($testimonial->avatar)
+                                    <img src="{{ Storage::url($testimonial->avatar) }}" alt="{{ $testimonial->name }}" class="w-12 h-12 rounded-full object-cover">
+                                @else
+                                    <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">
+                                        {{ strtoupper(substr($testimonial->name, 0, 2)) }}
+                                    </div>
+                                @endif
+                                <div class="ml-4">
+                                    <div class="font-bold text-gray-900">{{ $testimonial->name }}</div>
+                                    <div class="text-sm text-gray-600">{{ $testimonial->position }}{{ $testimonial->company ? ' - ' . $testimonial->company : '' }}</div>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                @for($i = 0; $i < $testimonial->rating; $i++)
+                                <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                @endfor
+                            </div>
+                            <p class="text-gray-600 text-sm italic">"{{ $testimonial->content }}"</p>
                         </div>
-                    @endif
-                    <div class="ml-4">
-                        <div class="font-bold text-gray-900">{{ $testimonial->name }}</div>
-                        <div class="text-sm text-gray-600">{{ $testimonial->position }}{{ $testimonial->company ? ' - ' . $testimonial->company : '' }}</div>
                     </div>
+                    @empty
+                    <div class="testi-slide flex-shrink-0 px-3" style="width: 33.3333%;">
+                        <div class="bg-white rounded-xl p-6 shadow-lg h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">BS</div>
+                                <div class="ml-4">
+                                    <div class="font-bold text-gray-900">Budi Santoso</div>
+                                    <div class="text-sm text-gray-600">HSE Manager - PT Energi Jaya</div>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                @for($i = 0; $i < 5; $i++)
+                                <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                @endfor
+                            </div>
+                            <p class="text-gray-600 text-sm italic">"Pelatihan AK3 Umum di SinartaMJS sangat profesional. Instruktur berpengalaman dan materi sangat aplikatif. Highly recommended!"</p>
+                        </div>
+                    </div>
+                    <div class="testi-slide flex-shrink-0 px-3" style="width: 33.3333%;">
+                        <div class="bg-white rounded-xl p-6 shadow-lg h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">SM</div>
+                                <div class="ml-4">
+                                    <div class="font-bold text-gray-900">Siti Maulida</div>
+                                    <div class="text-sm text-gray-600">K3 Officer - PT Maju Bersama</div>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                @for($i = 0; $i < 5; $i++)
+                                <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                @endfor
+                            </div>
+                            <p class="text-gray-600 text-sm italic">"Proses perpanjangan SKP sangat cepat dan mudah. Staff sangat responsif dan membantu. Pelayanan prima!"</p>
+                        </div>
+                    </div>
+                    <div class="testi-slide flex-shrink-0 px-3" style="width: 33.3333%;">
+                        <div class="bg-white rounded-xl p-6 shadow-lg h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">AP</div>
+                                <div class="ml-4">
+                                    <div class="font-bold text-gray-900">Ahmad Putra</div>
+                                    <div class="text-sm text-gray-600">Safety Supervisor</div>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                @for($i = 0; $i < 5; $i++)
+                                <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                @endfor
+                            </div>
+                            <p class="text-gray-600 text-sm italic">"Fasilitas pelatihan sangat memadai. Materi up to date sesuai regulasi terbaru. Top!"</p>
+                        </div>
+                    </div>
+                    @endforelse
+
                 </div>
-                <div class="flex mb-4">
-                    @for($i = 0; $i < $testimonial->rating; $i++)
-                    <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    @endfor
-                </div>
-                <p class="text-gray-600 text-sm italic">
-                    "{{ $testimonial->content }}"
-                </p>
             </div>
-            @empty
-            <!-- Default Testimonials jika database kosong -->
-            <div class="bg-white rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">
-                        BS
-                    </div>
-                    <div class="ml-4">
-                        <div class="font-bold text-gray-900">Budi Santoso</div>
-                        <div class="text-sm text-gray-600">HSE Manager - PT Energi Jaya</div>
-                    </div>
-                </div>
-                <div class="flex mb-4">
-                    @for($i = 0; $i < 5; $i++)
-                    <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    @endfor
-                </div>
-                <p class="text-gray-600 text-sm italic">
-                    "Pelatihan AK3 Umum di SinartaMJS sangat profesional. Instruktur berpengalaman dan materi sangat aplikatif. Highly recommended!"
-                </p>
-            </div>
-            
-            <div class="bg-white rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">
-                        SM
-                    </div>
-                    <div class="ml-4">
-                        <div class="font-bold text-gray-900">Siti Maulida</div>
-                        <div class="text-sm text-gray-600">K3 Officer - PT Maju Bersama</div>
-                    </div>
-                </div>
-                <div class="flex mb-4">
-                    @for($i = 0; $i < 5; $i++)
-                    <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    @endfor
-                </div>
-                <p class="text-gray-600 text-sm italic">
-                    "Proses perpanjangan SKP sangat cepat dan mudah. Staff sangat responsif dan membantu. Pelayanan prima!"
-                </p>
-            </div>
-            
-            <div class="bg-white rounded-xl p-6 shadow-lg">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-maroon rounded-full flex items-center justify-center text-white font-bold">
-                        AP
-                    </div>
-                    <div class="ml-4">
-                        <div class="font-bold text-gray-900">Ahmad Putra</div>
-                        <div class="text-sm text-gray-600">Safety Supervisor</div>
-                    </div>
-                </div>
-                <div class="flex mb-4">
-                    @for($i = 0; $i < 5; $i++)
-                    <svg class="w-5 h-5 text-yellow" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    @endfor
-                </div>
-                <p class="text-gray-600 text-sm italic">
-                    "Fasilitas pelatihan sangat memadai. Materi up to date sesuai regulasi terbaru. Top!"
-                </p>
-            </div>
-            @endforelse
+
+            <!-- Tombol Kanan -->
+            <button id="testi-next" class="flex-shrink-0 w-14 h-14 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const track = document.getElementById('testi-track');
+    const slides = track ? track.querySelectorAll('.testi-slide') : [];
+    const prevBtn = document.getElementById('testi-prev');
+    const nextBtn = document.getElementById('testi-next');
+
+    if (!track || slides.length === 0) return;
+
+    let current = 0;
+
+    function visibleCount() {
+        return window.innerWidth < 768 ? 1 : 3;
+    }
+
+    function maxIndex() {
+        return Math.max(0, slides.length - visibleCount());
+    }
+
+    function setSlideWidths() {
+        const width = 100 / visibleCount();
+        slides.forEach(slide => {
+            slide.style.width = width + '%';
+        });
+    }
+
+    function updateSlider() {
+        const offsetPercent = current * (100 / visibleCount());
+        track.style.transform = `translateX(-${offsetPercent}%)`;
+        prevBtn.style.opacity = current === 0 ? '0.35' : '1';
+        prevBtn.style.pointerEvents = current === 0 ? 'none' : 'auto';
+        nextBtn.style.opacity = current >= maxIndex() ? '0.35' : '1';
+        nextBtn.style.pointerEvents = current >= maxIndex() ? 'none' : 'auto';
+    }
+
+    prevBtn.addEventListener('click', function () {
+        if (current > 0) { current--; updateSlider(); }
+    });
+
+    nextBtn.addEventListener('click', function () {
+        if (current < maxIndex()) { current++; updateSlider(); }
+    });
+
+    window.addEventListener('resize', function () {
+        current = 0;
+        setSlideWidths();
+        updateSlider();
+    });
+
+    setSlideWidths();
+    updateSlider();
+});
+</script>
+
 
 <!-- Partners Section (Optional) -->
 {{-- @if($partners->isNotEmpty())
