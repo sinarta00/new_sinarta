@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use App\Filament\Resources\ProgramResource\RelationManagers\SchedulesRelationManager;
+use Filament\Forms\Components\FileUpload;
 
 class ProgramResource extends Resource
 {
@@ -58,6 +59,12 @@ class ProgramResource extends Resource
                             ->rows(5)
                             ->columnSpanFull(),
                         
+                        Forms\components\Textarea::make('requirements')
+                            ->label('Persyaratan')
+                            ->helperText('Setiap baris akan menjadi 1 poin persyaratan')
+                            ->rows(5)
+                            ->columnSpanFull(),
+                        
                         Forms\Components\FileUpload::make('image')
                             ->label('Gambar Program')
                             ->image()
@@ -73,6 +80,15 @@ class ProgramResource extends Resource
                             ->downloadable()
                             ->previewable(false)
                             ->nullable(),
+
+                        Forms\Components\FileUpload::make('registration_flow_image')
+                            ->label('Foto alur registrasi')
+                            ->image()
+                            ->directory('programs/registration-flow')
+                            ->imageEditor()
+                            ->maxSize(10240)
+                            ->acceptedFileTypes(['image/jpg', 'image/png', 'image/webp'])
+                            ->nullable()
                     ]),
                 
                 Forms\Components\Section::make('Harga & Kuota')

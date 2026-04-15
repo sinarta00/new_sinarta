@@ -15,7 +15,7 @@ Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 Route::get('/layanan', [ServicePageController::class, 'index'])->name('services');
 Route::get('/layanan/{slug}', [ServicePageController::class, 'show'])->name('services.show');
 Route::get('/program', [ProgramPageController::class, 'index'])->name('programs');
-Route::get('/program/{slug}', [ProgramPageController::class, 'show'])->name('programs.show');
+Route::get('/programs/{program}', [ProgramPageController::class, 'show'])->name('program.show');
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 // Instructor Routes

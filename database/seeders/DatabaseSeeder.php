@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // HeroSeeder::class,
             // ServiceSeeder::class,
-            // ProgramSeeder::class,
+            ProgramSeeder::class,
             // TestimonialSeeder::class,
             // PartnerSeeder::class,
             InstructorPageContentSeeder::class,

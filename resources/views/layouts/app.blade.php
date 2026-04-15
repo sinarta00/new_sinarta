@@ -81,11 +81,6 @@
        class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('about') ? 'text-maroon' : '' }}">
         Tentang
     </a>
-    <a href="{{ route('services') }}" 
-       onclick="trackClick('navbar', 'Menu - Layanan');"
-       class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('services*') ? 'text-maroon' : '' }}">
-        Layanan
-    </a>
     <a href="{{ route('programs') }}" 
        onclick="trackClick('navbar', 'Menu - Program');"
        class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('programs*') ? 'text-maroon' : '' }}">
@@ -125,11 +120,6 @@
            onclick="trackClick('navbar_mobile', 'Menu - Tentang');"
            class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('about') ? 'bg-gray-50 text-maroon' : '' }}">
             Tentang
-        </a>
-        <a href="{{ route('services') }}" 
-           onclick="trackClick('navbar_mobile', 'Menu - Layanan');"
-           class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('services*') ? 'bg-gray-50 text-maroon' : '' }}">
-            Layanan
         </a>
         <a href="{{ route('programs') }}" 
            onclick="trackClick('navbar_mobile', 'Menu - Program');"

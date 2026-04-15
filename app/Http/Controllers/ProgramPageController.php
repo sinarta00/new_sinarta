@@ -26,9 +26,9 @@ class ProgramPageController extends Controller
         return view('programs.index', compact('programs'));
     }
     
-    public function show($slug)
+    public function show(Program $program)
     {
         // Untuk detail program (opsional)
-        return view('programs.show');
+        return view('programs.show', compact('program'));
     }
 }
