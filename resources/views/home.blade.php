@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 
                 <a href="{{ route('about') }}" class="inline-block bg-maroon text-white px-8 py-3 rounded-lg font-semibold hover:bg-maroon-dark transition">
-                    Selengkapnya Tentang Kami
+                    Selengkapnya
                 </a>
             </div>
         </div>
@@ -470,8 +470,69 @@ document.addEventListener('DOMContentLoaded', function() {
                 Kami menyediakan berbagai program pelatihan dan sertifikasi K3 yang disesuaikan dengan kebutuhan industri
             </p>
         </div>
+
+          @if($programs->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($programs as $program)
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition group flex flex-col h-full">
+                    <div class="relative h-48 overflow-hidden rounded-t-xl">
+                        @if($program->image)
+                            <img src="{{ Storage::url($program->image) }}" 
+                                 alt="{{ $program->title }}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        @else
+                            <div class="w-full h-full bg-gradient-to-br from-maroon to-maroon-dark flex items-center justify-center">
+                                <svg class="w-16 h-16 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                        @endif
+                        
+                        <!-- Category Badge -->
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-yellow text-maroon px-3 py-1 rounded-full text-sm font-bold">
+                                {{ $program->category }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 flex flex-col flex-1 justify-between w-full">  
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $program->title }}</h3>
+                        
+                        <div class="text-gray-600 text-sm mb-4 line-clamp-3 min-h-[200px]">
+                            {!! Str::limit(strip_tags($program->description), 120) !!}
+                        </div>
+                        <div class="flex gap-2 mt-2" style="justify-content: end;">
+                                {{-- Tombol Daftar --}}
+                                <a href="{{ route('program.show', $program->id) }}"
+                                    class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
+                                    Detail
+                                </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+          
+            
+        @else
+            <div class="text-center py-12">
+                <div class="text-gray-400 mb-4">
+                    <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">Program Tidak Ditemukan</h3>
+                <p class="text-gray-500 mb-6">Coba ubah filter atau kata kunci pencarian Anda</p>
+                <a href="{{ route('programs') }}" 
+                   onclick="trackClick('program_list', 'Button - Lihat Semua Program dari Empty State');"
+                   class="inline-block bg-maroon text-white px-6 py-3 rounded-lg hover:bg-maroon-dark transition font-semibold">
+                    Lihat Semua Program
+                </a>
+            </div>
+        @endif
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse($services as $service)
             <!-- Service Card -->
             <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition group">
@@ -484,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="text-gray-600 text-sm mb-4">
                     {{ Str::limit($service->description, 100) }}
                 </p>
-                <a href="{{ route('services') }}" class="text-maroon font-semibold text-sm hover:text-yellow transition inline-flex items-center">
+                <a href="{{ route('programs') }}" class="text-maroon font-semibold text-sm hover:text-yellow transition inline-flex items-center">
                     Selengkapnya
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -503,7 +564,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="text-gray-600 text-sm mb-4">
                     Pelatihan Ahli K3 Umum dengan sertifikat Kemnaker untuk meningkatkan kompetensi di bidang K3
                 </p>
-                <a href="{{ route('services') }}" class="text-maroon font-semibold text-sm hover:text-yellow transition inline-flex items-center">
+                <a href="{{ route('programs') }}" class="text-maroon font-semibold text-sm hover:text-yellow transition inline-flex items-center">
                     Selengkapnya
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -565,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
             </div>
             @endforelse
-        </div>
+        </div> --}}
     </div>
 </section>
 
