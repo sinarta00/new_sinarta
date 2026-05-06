@@ -6,10 +6,15 @@
 <section class="lg:py-24">
     <div class="container mx-auto px-4 sm:px-6 py-16">
 
+        @php
+            $variants = $program->variants;
+            $hasVariants = $variants->count() > 1 || $variants->first()?->name !== null;
+        @endphp
+
         {{-- flex-col di mobile (order diatur), flex-row di desktop --}}
         <div class="flex flex-col md:flex-row gap-8">
 
-            {{-- LEFT: Text Content — order-2 di mobile (tampil bawah), order-none di lg --}}
+            {{-- LEFT: Text Content --}}
             <div class="w-full order-2 md:order-1">
                 <div class="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold uppercase tracking-widest"
                     style="background: rgba(128,0,32,0.08); color: var(--maroon);">
@@ -29,37 +34,78 @@
                 </div>
 
                 {{-- Harga --}}
-                @php
-                    $price = $program->price;
-                    $discountPercent = $program->discount ?? 0;
-                    $hasDiscount = $discountPercent > 0;
-                    $discountedPrice = $hasDiscount
-                        ? $price - ($price * $discountPercent / 100)
-                        : null;
-                @endphp
+                <div class="mt-8 mb-8">
+                    @if($hasVariants)
+                        {{-- Program dengan tipe (Personal/Utusan/Online/Offline) --}}
+                        <div class="flex gap-6">
+                            @foreach($variants as $variant)
+                                @php
+                                    $hasDiscount = ($variant->discount ?? 0) > 0;
+                                    $discountedPrice = $hasDiscount
+                                        ? $variant->price - ($variant->price * $variant->discount / 100)
+                                        : null;
+                                @endphp
+                                <div class="flex items-center gap-4 flex-wrap">
+                                    {{-- Badge nama varian --}}
+                                    <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold"
+                                        style="background: rgba(128,0,32,0.10); color: var(--maroon);">
+                                        {{ $variant->name }}
+                                    </span>
 
-                <div class="mt-4 mb-4 flex items-center gap-3 flex-wrap">
-                    @if($hasDiscount)
-                        <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold"
-                            style="background: rgba(128,0,32,0.10); color: var(--maroon);">
-                            Promo
-                        </span>
-                        <div class="flex flex-col">
-                            <span class="text-sm text-gray-400" style="text-decoration: line-through;">
-                                Rp {{ number_format($price, 0, ',', '.') }}
-                            </span>
-                            <span class="text-2xl sm:text-3xl font-bold" style="color: var(--maroon);">
-                                Rp {{ number_format($discountedPrice, 0, ',', '.') }}
-                            </span>
+                                    {{-- Harga --}}
+                                    @if($hasDiscount)
+                                        <div class="flex flex-col">
+                                            <span class="text-sm text-gray-400 line-through">
+                                                Rp {{ number_format($variant->price, 0, ',', '.') }}
+                                            </span>
+                                            <span class="text-xl font-bold" style="color: var(--maroon);">
+                                                Rp {{ number_format($discountedPrice, 0, ',', '.') }}
+                                            </span>
+                                        </div>
+                                    @else
+                                        <span class="text-xl font-bold" style="color: var(--maroon);">
+                                            Rp {{ number_format($variant->price, 0, ',', '.') }}
+                                        </span>
+                                    @endif
+                                </div>
+                            @endforeach
                         </div>
+
                     @else
-                        <span class="text-2xl sm:text-3xl font-bold" style="color: var(--maroon);">
-                            Rp {{ number_format($price, 0, ',', '.') }}
-                        </span>
+                        {{-- Program 1 harga tanpa tipe --}}
+                        @php
+                            $single = $variants->first();
+                            $hasDiscount = ($single?->discount ?? 0) > 0;
+                            $discountedPrice = $hasDiscount
+                                ? $single->price - ($single->price * $single->discount / 100)
+                                : null;
+                        @endphp
+
+                        <div class="flex items-center gap-3 flex-wrap">
+                            @if($hasDiscount)
+                                <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold"
+                                    style="background: rgba(128,0,32,0.10); color: var(--maroon);">
+                                    Promo
+                                </span>
+                                <div class="flex flex-col">
+                                    <span class="text-sm text-gray-400 line-through">
+                                        Rp {{ number_format($single->price, 0, ',', '.') }}
+                                    </span>
+                                    <span class="text-2xl sm:text-3xl font-bold" style="color: var(--maroon);">
+                                        Rp {{ number_format($discountedPrice, 0, ',', '.') }}
+                                    </span>
+                                </div>
+                            @elseif($single?->price)
+                                <span class="text-2xl sm:text-3xl font-bold" style="color: var(--maroon);">
+                                    Rp {{ number_format($single->price, 0, ',', '.') }}
+                                </span>
+                            @endif
+                        </div>
                     @endif
                 </div>
 
                 {{-- Schedule --}}
+                @if($program->schedules->isNotEmpty())
                 <p class="mb-4 text-sm sm:text-base" style="color: var(--maroon-dark);">
                     <span class="font-semibold">Jadwal yang akan datang:</span>
                     @foreach ($program->schedules as $schedule)
@@ -71,10 +117,12 @@
                         @endif
                     @endforeach
                 </p>
+                @endif
 
                 {{-- CTA Buttons --}}
                 <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 
+                    {{-- Tombol Unduh Proposal --}}
                     @if($program->pdf_file ?? null)
                     <a href="{{ asset('storage/' . $program->pdf_file) }}"
                         download
@@ -85,19 +133,37 @@
                     </a>
                     @endif
 
-                    @if($program->registration_link ?? null)
-                    <a href="{{ $program->registration_link }}"
-                        target="_blank"
-                        onclick="trackClick('hero', 'Daftar Sekarang');"
-                        class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90 sm:w-auto"
-                        style="background: var(--maroon);">
-                        Daftar Sekarang
-                    </a>
+                    {{-- Tombol Daftar --}}
+                    @if($hasVariants)
+                        {{-- Multi varian: tombol per varian --}}
+                        @foreach($variants->where('is_active', true) as $variant)
+                            @if($variant->registration_link)
+                            <a href="{{ $variant->registration_link }}"
+                                target="_blank"
+                                onclick="trackClick('hero', 'Daftar {{ $variant->name }}');"
+                                class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+                                style="background: var(--maroon);">
+                                Daftar – {{ $variant->name }}
+                            </a>
+                            @endif
+                        @endforeach
+                    @else
+                        {{-- 1 harga: tombol daftar tunggal --}}
+                        @if($variants->first()?->registration_link)
+                        <a href="{{ $variants->first()->registration_link }}"
+                            target="_blank"
+                            onclick="trackClick('hero', 'Daftar Sekarang');"
+                            class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90 sm:w-auto"
+                            style="background: var(--maroon);">
+                            Daftar Sekarang
+                        </a>
+                        @endif
                     @endif
+
                 </div>
             </div>
 
-            {{-- RIGHT: Visual Card — order-1 di mobile (tampil atas), order-none di lg --}}
+            {{-- RIGHT: Visual Card --}}
             <div class="w-full order-1 md:order-2">
                 <div class="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl"
                     style="background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);">
@@ -114,8 +180,9 @@
                                 class="h-full w-full object-cover opacity-90 sm:h-56 lg:h-40">
                     </div>
                     @else
-                   <div class="w-full h-40 sm:h-56 opacity-90" style="background: var(--maroon);">
+                    <div class="w-full h-40 sm:h-56 opacity-90 rounded-xl" style="background: rgba(255,255,255,0.05);"></div>
                     @endif
+
                 </div>
             </div>
 
@@ -143,10 +210,12 @@
                     </h3>
 
                     @php
-                        $features = preg_split('/\r\n|\r|\n/', $program->features);
-                        $requirements = preg_split('/\r\n|\r|\n/', $program->requirements);
+                        $features = $program->features
+                            ? preg_split('/\r\n|\r|\n/', $program->features)
+                            : [];
                     @endphp
 
+                    @if(!empty(array_filter($features)))
                     <ul class="space-y-4">
                         @foreach ($features as $item)
                             @if(trim($item))
@@ -165,6 +234,9 @@
                             @endif
                         @endforeach
                     </ul>
+                    @else
+                        <p class="text-sm text-gray-400">Belum ada data fasilitas.</p>
+                    @endif
                 </div>
 
                 {{-- Divider hanya di mobile --}}
@@ -176,6 +248,13 @@
                         Persyaratan Administrasi
                     </h3>
 
+                    @php
+                        $requirements = $program->requirements
+                            ? preg_split('/\r\n|\r|\n/', $program->requirements)
+                            : [];
+                    @endphp
+
+                    @if(!empty(array_filter($requirements)))
                     <ul class="space-y-4">
                         @foreach ($requirements as $item)
                             @if(trim($item))
@@ -191,11 +270,12 @@
                                     {{ trim($item) }}
                                 </span>
                             </li>
-                            @else
-                            <span class="text-sm sm:text-base leading-snug text-gray-800">Data not found</span>
                             @endif
                         @endforeach
                     </ul>
+                    @else
+                        <p class="text-sm text-gray-400">Belum ada data persyaratan.</p>
+                    @endif
                 </div>
 
             </div>

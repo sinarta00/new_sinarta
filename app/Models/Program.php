@@ -54,4 +54,22 @@ class Program extends Model
                     ->limit(3);
     }
 
+    public function variants(): HasMany
+    {
+        return $this->hasMany(ProgramVariant::class)->orderBy('order');
+    }
+
+    public function hasVariants(): bool
+    {
+        return $this->variants()->whereNotNull('name')->exists();
+    }
+
+    public function getPriceRangeAttribute(): string
+    {
+        $prices = $this->variants->pluck('price');
+        if ($prices->isEmpty()) return '-';
+        if ($prices->count() === 1) return 'Rp ' . number_format($prices->first(), 0, ',', '.');
+        return 'Rp ' . number_format($prices->min(), 0, ',', '.') . ' – Rp ' . number_format($prices->max(), 0, ',', '.');
+    }
+
 }

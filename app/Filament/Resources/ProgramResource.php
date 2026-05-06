@@ -68,6 +68,7 @@ class ProgramResource extends Resource
                         Forms\Components\FileUpload::make('image')
                             ->label('Gambar Program')
                             ->image()
+                            ->disk('public')
                             ->directory('programs')
                             ->maxSize(2048)
                             ->columnSpanFull(),
@@ -90,35 +91,58 @@ class ProgramResource extends Resource
                             ->acceptedFileTypes(['image/jpg', 'image/png', 'image/webp'])
                             ->nullable()
                     ]),
-                
-                Forms\Components\Section::make('Harga & Kuota')
-                    ->schema([
-                        Forms\Components\TextInput::make('price')
-                            ->label('Harga (Rp)')
-                            ->numeric()
-                            ->prefix('Rp')
-                            ->helperText('Kosongkan jika tidak ingin menampilkan harga'),
-                        Forms\Components\TextInput::make('discount')
-                        ->label('Diskon (%)')
-                        ->numeric()
-                        ->minValue(0)
-                        ->maxValue(100)
-                        ->suffix('%')
-                        ->helperText('Isi jika ada diskon. Contoh: 20 untuk diskon 20%')
-                        ->nullable(),
-                    ])->columns(2),
 
-                Forms\Components\Section::make('Link Pendaftaran')
-                    ->schema([
-                        Forms\Components\TextInput::make('registration_link')
-                            ->label('Link Pendaftaran')
-                            ->url()
-                            ->placeholder('https://wa.me/6281234567890 atau https://forms.gle/xxxxx')
-                            ->helperText('Link untuk tombol "Daftar". Kosongkan untuk menggunakan WhatsApp default.')
-                            ->maxLength(500)
-                            ->columnSpanFull(),
-                ]),
+                    Forms\Components\Section::make('Harga & Varian')
+                        ->description('Tambahkan 1 varian saja jika program tidak berjenis (kosongkan kolom Tipe)')
+                        ->schema([
+                            Forms\Components\Repeater::make('variants')
+                                ->relationship('variants')
+                                ->schema([
+                                    Forms\Components\TextInput::make('name')
+                                        ->label('Tipe Varian')
+                                        ->placeholder('Personal / Utusan Perusahaan / Online / Offline')
+                                        ->helperText('Kosongkan jika program hanya 1 harga')
+                                        ->nullable(),
+
+                                    Forms\Components\TextInput::make('price')
+                                        ->label('Harga (Rp)')
+                                        ->numeric()
+                                        ->prefix('Rp')
+                                        ->required(),
+
+                                    Forms\Components\TextInput::make('discount')
+                                        ->label('Diskon')
+                                        ->numeric()
+                                        ->suffix('%')
+                                        ->minValue(0)
+                                        ->maxValue(100)
+                                        ->nullable(),
+
+                                    Forms\Components\TextInput::make('duration')
+                                        ->label('Durasi')
+                                        ->placeholder('Contoh: 12 Hari')
+                                        ->helperText('Kosongkan jika sama dengan durasi program')
+                                        ->nullable(),
+
+                                    Forms\Components\TextInput::make('registration_link')
+                                        ->label('Link Pendaftaran')
+                                        ->url()
+                                        ->placeholder('https://wa.me/...')
+                                        ->nullable()
+                                        ->columnSpanFull(),
+
+                                    Forms\Components\Toggle::make('is_active')
+                                        ->label('Aktif')
+                                        ->default(true),
+                                ])
+                                ->columns(2)
+                                ->orderColumn('order')
+                                ->addActionLabel('+ Tambah Varian')
+                                ->defaultItems(1)        // otomatis 1 baris saat create baru
+                                ->columnSpanFull(),
+                        ]),
                 
+
                 Forms\Components\Section::make('Pengaturan Tampilan')
                     ->schema([
                         Forms\Components\Toggle::make('is_active')
@@ -145,7 +169,9 @@ class ProgramResource extends Resource
                     ->sortable(),
                 
                 Tables\Columns\ImageColumn::make('image')
-                    ->label('Gambar'),
+                    ->label('Gambar')
+                    ->disk('public')
+                    ->height(50),
                 
                 Tables\Columns\TextColumn::make('title')
                     ->label('Nama Program')
@@ -166,16 +192,16 @@ class ProgramResource extends Resource
                 Tables\Columns\TextColumn::make('duration')
                     ->label('Durasi'),
                 
-                Tables\Columns\TextColumn::make('price')
+                Tables\Columns\TextColumn::make('price_range')
                     ->label('Harga')
-                    ->money('IDR')
-                    ->sortable(),
-                
-                Tables\Columns\TextColumn::make('discount')
-                ->label('Diskon')
-                ->suffix('%')
-                ->color('danger')
-                ->sortable(),
+                    ->getStateUsing(fn ($record) => $record->price_range)
+                    ->sortable(false),
+
+                Tables\Columns\TextColumn::make('variants_count')
+                    ->counts('variants')
+                    ->label('Varian')
+                    ->badge()
+                    ->color('info'),
 
                 Tables\Columns\IconColumn::make('registration_link')
                     ->label('Link Daftar')

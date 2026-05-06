@@ -508,6 +508,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                     class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
                                     Detail
                                 </a>
+
+                                 <a href="{{ $program->variants->first()?->registration_link }}"
+                                    class="bg-yellow text-maroon px-6 py-2 rounded-lg hover:bg-yellow-light transition font-semibold text-sm">
+                                    Daftar Sekarang
+                                </a>
                         </div>
                     </div>
                 </div>

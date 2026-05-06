@@ -9,7 +9,7 @@ class ProgramPageController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Program::where('is_active', true);
+        $query = Program::query()->where('is_active', true);
         
         // Filter by category
         if ($request->has('category') && $request->category != '') {
@@ -27,8 +27,12 @@ class ProgramPageController extends Controller
     }
     
     public function show(Program $program)
-    {
-        // Untuk detail program (opsional)
+   {
+        $program->load([
+            'variants' => fn($q) => $q->where('is_active', true)->orderBy('order'),
+            'schedules' => fn($q) => $q->where('start_date', '>=', now())->orderBy('start_date'),
+        ]);
+
         return view('programs.show', compact('program'));
     }
 }
