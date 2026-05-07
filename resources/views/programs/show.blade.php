@@ -45,7 +45,7 @@
                                         ? $variant->price - ($variant->price * $variant->discount / 100)
                                         : null;
                                 @endphp
-                                <div class="flex items-center gap-4 flex-wrap">
+                                <div class="flex items-center gap-4 flex-wrap border rounded-xl px-4 py-3 bg-white shadow-sm">
                                     {{-- Badge nama varian --}}
                                     <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold"
                                         style="background: rgba(128,0,32,0.10); color: var(--maroon);">
