@@ -15,7 +15,7 @@ class SchedulesRelationManager extends RelationManager
     protected static string $relationship = 'schedules';
     protected static ?string $title = 'Jadwal Pelatihan';
 
-    public function form(Form $form): Form
+   public function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Grid::make(2)->schema([
@@ -30,6 +30,28 @@ class SchedulesRelationManager extends RelationManager
                     ->native(false)
                     ->afterOrEqual('start_date'),
             ]),
+
+            Forms\Components\Section::make('Tanggal Ujian')
+                ->description('Isi sesuai jenis program. Kemnaker: Seminar & Teori. BNSP: Assesment.')
+                ->schema([
+                    Forms\Components\Grid::make(3)->schema([
+                        Forms\Components\DatePicker::make('exam_date_seminar')
+                            ->label('Ujian Seminar')
+                            ->native(false)
+                            ->nullable(),
+
+                        Forms\Components\DatePicker::make('exam_date_teori')
+                            ->label('Ujian Teori')
+                            ->native(false)
+                            ->nullable(),
+
+                        Forms\Components\DatePicker::make('exam_date_assesment')
+                            ->label('Assesment')
+                            ->native(false)
+                            ->nullable(),
+                    ]),
+                ])
+                ->collapsible(),
 
             Forms\Components\Grid::make(2)->schema([
                 Forms\Components\TextInput::make('city')
@@ -72,6 +94,21 @@ class SchedulesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('end_date')
                     ->label('Tanggal Selesai')
                     ->date('d M Y'),
+
+                Tables\Columns\TextColumn::make('exam_date_seminar')
+                    ->label('Ujian Seminar')
+                    ->date('d M Y')
+                    ->placeholder('-'),
+
+                Tables\Columns\TextColumn::make('exam_date_teori')
+                    ->label('Ujian Teori')
+                    ->date('d M Y')
+                    ->placeholder('-'),
+
+                Tables\Columns\TextColumn::make('exam_date_assesment')
+                    ->label('Assesment BNSP')
+                    ->date('d M Y')
+                    ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('city')
                     ->label('Kota'),
