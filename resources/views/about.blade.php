@@ -20,7 +20,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
                 <div class="inline-block text-maroon font-semibold mb-4">PROFIL PERUSAHAAN</div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                <h2 class="text-3xl md:text-2xl font-bold text-gray-900 mb-6">
                     Mitra Terpercaya untuk Sertifikasi K3
                 </h2>
                 <p class="text-gray-600 mb-4 leading-relaxed">
@@ -41,7 +41,7 @@
             </div>
             
             <div class="relative">
-                <img src="{{ asset('images/about_photo.jpg') }}"
+                <img src="{{ asset('images/foto_profile.png') }}"
                      alt="Tim SinartaMJS" 
                      class="rounded-2xl shadow-2xl">
             </div>
