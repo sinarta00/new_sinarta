@@ -228,7 +228,7 @@
                         </a>
     
                         {{-- TikTok --}}
-                        <a href="https://www.tiktok.com/@sinartamjs"
+                        <a href="https://www.tiktok.com/@sinarta_id"
                         target="_blank"
                         onclick="trackClick('footer', 'Social - TikTok');"
                         class="w-11 h-11 rounded-lg border border-white/30 flex items-center justify-center hover:bg-white/10 transition">
@@ -296,6 +296,33 @@
                 }
             });
         });
+
+        (function () {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // animasi hanya sekali
+                        }
+                    });
+                },
+                {
+                    threshold: 0.12,      // mulai saat 12% elemen terlihat
+                    rootMargin: '0px 0px -40px 0px'  // sedikit offset dari bawah
+                }
+            );
+
+            // Target semua elemen dengan data-animate
+            document.querySelectorAll('[data-animate]').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // Target semua group
+            document.querySelectorAll('[data-animate-group]').forEach((el) => {
+                observer.observe(el);
+            });
+        })();
     </script>
 
     @stack('scripts')

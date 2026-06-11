@@ -142,10 +142,84 @@
             transparent 100%);
     }
 
+    .jumbotron-title {
+        font-size: 28px;
+    }
+
+    .jumbotron-desc {
+        font-size: 13px;
+        max-width: 300px;
+    }
+
     .jumbotron-hashtags {
         font-size: 16px;
     }
 
+}
+
+/* ══════════════════════════════════════
+   JUMBOTRON ENTRANCE ANIMATIONS
+══════════════════════════════════════ */
+
+/* Hashtag — fade in dari atas */
+@keyframes jumbotronHashtag {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Judul — fade in dari kiri */
+@keyframes jumbotronTitle {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Deskripsi — fade in dari kiri, lebih lambat */
+@keyframes jumbotronDesc {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Tombol — fade in dari bawah */
+@keyframes jumbotronButtons {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Foto — fade in dari kanan */
+@keyframes jumbotronImage {
+    from { opacity: 0; transform: translateX(60px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Terapkan ke masing-masing elemen */
+.jumbotron-hashtags {
+    animation: jumbotronHashtag 0.7s ease-out forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+.jumbotron-title {
+    animation: jumbotronTitle 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.jumbotron-desc {
+    animation: jumbotronDesc 0.8s ease-out forwards;
+    animation-delay: 0.55s;
+    opacity: 0;
+}
+
+.jumbotron-buttons {
+    animation: jumbotronButtons 0.7s ease-out forwards;
+    animation-delay: 0.75s;
+    opacity: 0;
+}
+
+.jumbotron-image {
+    animation: jumbotronImage 1s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
 }
 </style>
 
@@ -263,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-            <div>
+            <div class="order-2 md:order-1">
                 <h2 class="text-3xl font-bold text-maroon mb-4">
                     PT Sinarta Multi Jasa Sertifikasi
                 </h2>
@@ -285,12 +359,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     ] as [$title, $desc])
                     <div class="flex items-start space-x-3">
                         <div class="bg-yellow rounded-lg p-2 mt-1 flex-shrink-0">
-                            <svg class="w-5 h-5 text-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
                         <div>
-                            <div class="font-semibold text-gray-900">{{ $title }}</div>
+                            <div class="font-semibold text-gray-900 text-sm">{{ $title }}</div>
                             <div class="text-gray-600 text-sm">{{ $desc }}</div>
                         </div>
                     </div>
@@ -298,8 +372,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
 
-            <div>
-                <img src="{{ asset('images/tentang_kami_home.png') }}"
+            <div class="order-1 md:order-2">
+                <img src="{{ asset('images/foto_profile.png') }}"
                      alt="Tim Profesional"
                      class="shadow-xl rounded w-full">
             </div>
@@ -393,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                             ?? '#';
                                     @endphp
                                     <a href="{{ $link }}" target="_blank"
-                                    class="inline-block bg-maroon text-white px-4 py-1.5 rounded-lg text-xs font-semibold hover:bg-maroon-dark transition">
+                                    class="inline-block bg-maroon text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-maroon-dark transition">
                                         Daftar
                                     </a>
                                 </td>
@@ -443,11 +517,11 @@ document.addEventListener('DOMContentLoaded', function () {
  
         @if($programs->count() > 0)
  
-        <div class="relative flex items-center gap-4">
+        <div class="relative flex items-center gap-1 md:gap-4">
  
             {{-- Prev Button --}}
             <button id="slider-prev"
-                class="flex-shrink-0 w-14 h-14 bg-white border border-gray-200 rounded-full shadow-md
+                class="flex-shrink-0 h-6 w-6 md:w-14 md:h-14 bg-white border border-gray-200 rounded-full shadow-md
                        flex items-center justify-center hover:bg-maroon hover:text-white hover:border-maroon
                        transition-all duration-200 text-gray-500">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -478,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             {{-- Konten Card --}}
                             <div class="px-4 py-2 flex flex-col flex-1">
  
-                                <h3 class="text-xl font-bold text-maroon mb-1">{{ $program->title }}</h3>
+                                <h3 class="text-2xl font-bold text-maroon mb-3">{{ $program->title }}</h3>
  
                                 {{-- Badge Info --}}
                                 <div class="flex flex-wrap gap-2 mb-2">
@@ -548,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function () {
  
             {{-- Next Button --}}
             <button id="slider-next"
-                class="flex-shrink-0 w-14 h-14 bg-white border border-gray-200 rounded-full shadow-md
+                class="flex-shrink-0 h-6 w-6 md:w-14 md:h-14 bg-white border border-gray-200 rounded-full shadow-md
                        flex items-center justify-center hover:bg-maroon hover:text-white hover:border-maroon
                        transition-all duration-200 text-gray-500">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -661,10 +735,10 @@ document.addEventListener('DOMContentLoaded', function () {
             </p>
         </div>
 
-        <div class="relative flex items-center gap-4">
+        <div class="relative flex items-center gap-1 md:gap-4">
 
             <button id="testi-prev"
-                    class="flex-shrink-0 w-14 h-14 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition">
+                    class="flex-shrink-0 h-6 w-6 md:w-14 md:h-14 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
                 </svg>
@@ -738,7 +812,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
 
             <button id="testi-next"
-                    class="flex-shrink-0 w-14 h-14 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition">
+                    class="flex-shrink-0 h-6 w-6 md:w-14 md:h-14 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-gray-50 transition">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -787,6 +861,79 @@ document.addEventListener('DOMContentLoaded', function () {
         setWidths();
         update();
     }
+
+});
+</script>
+
+{{-- ════════════════════════════════════════════
+     SCROLL ANIMATIONS
+════════════════════════════════════════════ --}}
+<style>
+/* ── Section fade-in dari bawah ── */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Child items: fade + stagger ── */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-item:nth-child(1) { transition-delay: 0.05s; }
+.reveal-item:nth-child(2) { transition-delay: 0.15s; }
+.reveal-item:nth-child(3) { transition-delay: 0.25s; }
+.reveal-item:nth-child(4) { transition-delay: 0.35s; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* ── 1. Setiap <section> fade-in saat masuk viewport ── */
+    document.querySelectorAll('section').forEach(function (el) {
+        /* Skip jumbotron — sudah langsung kelihatan saat load */
+        if (el.classList.contains('jumbotron-section')) return;
+        el.classList.add('reveal-section');
+    });
+
+    /* ── 2. Stagger untuk grid cards & list items ── */
+    const staggerTargets = [
+        /* Tentang Kami — checklist items */
+        '#tentang .space-y-4 > div',
+        /* Mengapa Memilih — 4 icon cards */
+        '.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4 > div',
+    ];
+    staggerTargets.forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el) {
+            el.classList.add('reveal-item');
+        });
+    });
+
+    /* ── 3. IntersectionObserver ── */
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px',
+    });
+
+    document.querySelectorAll('.reveal-section, .reveal-item').forEach(function (el) {
+        observer.observe(el);
+    });
 
 });
 </script>

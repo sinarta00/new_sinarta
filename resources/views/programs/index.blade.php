@@ -2,18 +2,6 @@
 
 @section('content')
 
-<!-- Page Header -->
-<section class="bg-gradient-to-br from-maroon to-maroon-dark text-white py-20">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Program Pelatihan</h1>
-            <p class="text-xl text-gray-200">
-                Pilih program pelatihan yang sesuai dengan kebutuhan Anda
-            </p>
-        </div>
-    </div>
-</section>
-
 <!-- Filter & Search -->
 <section class="py-8 bg-white border-b">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">

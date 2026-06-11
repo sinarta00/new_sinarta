@@ -3,7 +3,7 @@
 @section('content')
 
 {{-- Hero Section --}}
-<section class="lg:py-24">
+<section>
     <div class="container mx-auto px-4 sm:px-6 py-16">
 
         @php
@@ -106,17 +106,32 @@
 
                 {{-- Schedule --}}
                 @if($program->schedules->isNotEmpty())
-                <p class="mb-4 text-sm sm:text-base" style="color: var(--maroon-dark);">
-                    <span class="font-semibold">Jadwal yang akan datang:</span>
-                    @foreach ($program->schedules as $schedule)
-                        <span class="font-semibold">{{ \Carbon\Carbon::parse($schedule->start_date)->translatedFormat('j F Y') }}</span>
-                        -
-                        <span class="font-semibold">{{ \Carbon\Carbon::parse($schedule->end_date)->translatedFormat('j F Y') }}</span>
-                        @if (!$loop->last)
-                            <span class="font-bold text-xl">|</span>
-                        @endif
-                    @endforeach
-                </p>
+                <div class="relative inline-block mb-4">
+                    <button id="scheduleBtn"
+                            class="mx-auto px-4 py-2 rounded-lg border font-semibold bg-white transition hover:opacity-90"
+                            style="color: var(--maroon-dark);">
+                        Jadwal yang akan datang
+                    </button>
+
+                    <div id="scheduleDropdown"
+                        class="hidden absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border z-50">
+                        <div class="p-3 space-y-2 max-h-64 overflow-y-auto">
+                            @foreach ($program->schedules as $schedule)
+                                <div class="rounded-lg bg-gray-50 p-3">
+                                    {{ \Carbon\Carbon::parse($schedule->start_date)->translatedFormat('j F Y') }}
+                                    -
+                                    {{ \Carbon\Carbon::parse($schedule->end_date)->translatedFormat('j F Y') }}
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                document.getElementById('scheduleBtn').addEventListener('click', function() {
+                    document.getElementById('scheduleDropdown').classList.toggle('hidden');
+                });
+                </script>
                 @endif
 
                 {{-- CTA Buttons --}}
@@ -164,8 +179,8 @@
             </div>
 
             {{-- RIGHT: Visual Card --}}
-            <div class="w-full order-1 md:order-2">
-                <div class="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl"
+            <div class="w-full order-1 md:order-2 flex items-center justify-center">
+                <div class="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl w-full"
                     style="background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);">
                     <div class="pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full"
                             style="background: rgba(255,215,0,0.12);"></div>
