@@ -53,46 +53,84 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">  
         @if($programs->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($programs as $program)
-                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition group flex flex-col h-full">
-                    <div class="relative h-48 overflow-hidden rounded-t-xl">
+               @foreach($programs as $program)
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full">
+
+                    {{-- Gambar --}}
+                    <div class="relative h-44 overflow-hidden rounded-t-lg">
                         @if($program->image)
-                            <img src="{{ Storage::url($program->image) }}" 
-                                 alt="{{ $program->title }}" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <img src="{{ Storage::url($program->image) }}"
+                                alt="{{ $program->title }}"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-maroon to-maroon-dark flex items-center justify-center">
                                 <svg class="w-16 h-16 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                 </svg>
                             </div>
                         @endif
-                        
-                        <!-- Category Badge -->
-                        <div class="absolute top-4 right-4">
-                            <span class="bg-yellow text-maroon px-3 py-1 rounded-full text-sm font-bold">
+                    </div>
+
+                    {{-- Konten Card --}}
+                    <div class="px-4 py-2 flex flex-col flex-1">
+
+                        <h3 class="text-2xl font-bold text-maroon mb-3">{{ $program->title }}</h3>
+
+                        {{-- Badge Info --}}
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            @if($program->category)
+                            <span class="inline-flex items-center gap-1 font-medium px-3 rounded-full border border-maroon text-maroon border-1" style="font-size: 10px">
                                 {{ $program->category }}
                             </span>
+                            @endif
+                            @if($program->duration)
+                            <span class="inline-flex items-center gap-1 font-medium px-3 rounded-full border border-maroon text-maroon border-1" style="font-size: 10px">
+                                {{ $program->duration }}
+                            </span>
+                            @endif
                         </div>
-                    </div>
-                    
-                    <div class="p-6 flex flex-col flex-1 justify-between w-full">  
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $program->title }}</h3>
-                        
-                        <div class="text-gray-600 text-sm mb-4 line-clamp-3 min-h-[200px]">
-                            {!! Str::limit(strip_tags($program->description), 120) !!}
+
+                        {{-- Persyaratan --}}
+                        <div class="mb-2 flex-1">
+                            <p class="text-md font-semibold text-black-500 mb-1 uppercase tracking-wide">
+                                Persyaratan Umum
+                            </p>
+
+                            @php
+                                $requirements = $program->requirements
+                                    ? preg_split('/\r\n|\r|\n/', $program->requirements)
+                                    : [];
+                            @endphp
+
+                            @if(!empty(array_filter($requirements)))
+                                <ul>
+                                    @foreach(array_slice(array_filter($requirements), 0, 3) as $item)
+                                        @if(trim($item))
+                                            <li class="flex items-start text-xs text-gray-600 leading-relaxed">
+                                                <span>{{ trim($item) }}</span>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-xs text-gray-400">Belum ada data persyaratan.</p>
+                            @endif
                         </div>
-                        <div class="flex gap-2 mt-2" style="justify-content: end;">
-                                {{-- Tombol Daftar --}}
-                                <a href="{{ route('program.show', $program->id) }}"
-                                    class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-semibold text-sm">
-                                    Detail
-                                </a>
-                                <a href="{{ $program->variants->first()?->registration_link }}"
-                                    class="bg-yellow text-maroon px-6 py-2 rounded-lg hover:bg-yellow-light transition font-semibold text-sm">
-                                    Daftar Sekarang
-                                </a>
+
+                        {{-- Tombol --}}
+                        <div class="flex flex-col gap-2 mt-1">
+                            <a href="{{ $program->variants->first()?->registration_link ?? '#' }}"
+                            onclick="trackClick('program_card', 'Daftar - {{ addslashes($program->title) }}');"
+                            class="w-full text-center bg-maroon text-white py-2 font-semibold text-sm hover:bg-maroon-dark transition-colors duration-200">
+                                Daftar Pelatihan Sekarang
+                            </a>
+                            <a href="{{ route('program.show', $program->id) }}"
+                            onclick="trackClick('program_card', 'Detail - {{ addslashes($program->title) }}');"
+                            class="w-full text-center bg-yellow text-maroon py-2 font-semibold text-sm hover:bg-yellow-light transition-colors duration-200">
+                                Detail Pelatihan
+                            </a>
                         </div>
+
                     </div>
                 </div>
                 @endforeach
@@ -248,7 +286,7 @@
                     </svg>
                     Daftar via WhatsApp
                 </a>
-                <a href="{{ route('contact') }}" 
+                <a href="{{ route('about') . '#kontak' }}" 
                    onclick="trackClick('program_cta', 'Button - Konsultasi Gratis');"
                    class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-maroon transition">
                     Konsultasi Gratis

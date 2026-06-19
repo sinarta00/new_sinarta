@@ -24,14 +24,14 @@ class ContactController extends Controller
                 'program' => 'nullable|max:255',
                 'message' => 'required',
                 'recaptcha_token' => ['required', new RecaptchaRule],
-            ], [
-                'name.required' => 'Nama wajib diisi',
-                'email.required' => 'Email wajib diisi',
-                'email.email' => 'Format email tidak valid',
-                'phone.required' => 'No. telepon wajib diisi',
-                'message.required' => 'Pesan wajib diisi',
-                'recaptcha_token.required' => 'Verifikasi reCAPTCHA diperlukan',
-            ]);
+                ], [
+                    'name.required' => 'Nama wajib diisi',
+                    'email.required' => 'Email wajib diisi',
+                    'email.email' => 'Format email tidak valid',
+                    'phone.required' => 'No. telepon wajib diisi',
+                    'message.required' => 'Pesan wajib diisi',
+                    'recaptcha_token.required' => 'Verifikasi reCAPTCHA diperlukan',
+                ]);
             
             // Hapus recaptcha_token sebelum simpan ke database
             unset($validated['recaptcha_token']);
@@ -39,7 +39,7 @@ class ContactController extends Controller
             // Simpan ke database
             ContactMessage::create($validated);
             
-            return redirect()->back()->with('success', 'Pesan Anda berhasil dikirim! Kami akan segera menghubungi Anda.');
+           return redirect()->route('about')->with('success', 'Pesan Anda berhasil dikirim!');
             
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Validation error (termasuk reCAPTCHA gagal)

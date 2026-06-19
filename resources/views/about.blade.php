@@ -303,7 +303,7 @@
     </div>
 </section>
 
-<!-- CTA -->
+{{-- <!-- CTA -->
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-gradient-to-br from-maroon to-maroon-dark rounded-3xl p-8 md:p-16 text-center text-white" data-animate="fade-up">
@@ -319,7 +319,7 @@
                    class="bg-yellow text-maroon px-8 py-4 rounded-lg font-bold hover:bg-yellow-light transition">
                     Lihat Program Pelatihan
                 </a>
-                <a href="{{ route('contact') }}" 
+                <a href="{{ route('about') . '#kontak' }}" 
                    onclick="trackClick('about_cta', 'Button - Hubungi Kami');"
                    class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-maroon transition">
                     Hubungi Kami
@@ -327,8 +327,189 @@
             </div>
         </div>
     </div>
+</section> --}}
+
+<!-- Kirim Pesan -->
+<section id="kontak" class="py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-10">
+                <div class="inline-block text-maroon font-semibold mb-4">KONTAK KAMI</div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Kirim Pesan
+                </h2>
+                <p class="text-gray-600">
+                    Kami siap membantu Anda menemukan solusi pelatihan K3 yang tepat
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-xl" data-animate="fade-up">
+                <form action="{{ route('contact.store') }}" method="POST" class="space-y-6" id="contactForm" >
+                    @csrf
+
+                    {{-- Success --}}
+                    @if(session('success'))
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-green-700 font-medium">{{ session('success') }}</p>
+                        </div>
+                    </div>
+                    @endif
+
+                    {{-- Error --}}
+                    @if(session('error'))
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-red-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-red-700 font-medium">{{ session('error') }}</p>
+                        </div>
+                    </div>
+                    @endif
+
+                    <div>
+                        <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Nama Lengkap <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text"
+                               id="name"
+                               name="name"
+                               value="{{ old('name') }}"
+                               required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-transparent transition @error('name') border-red-500 @enderror"
+                               placeholder="Masukkan nama lengkap Anda">
+                        @error('name')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Email <span class="text-red-500">*</span>
+                        </label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               value="{{ old('email') }}"
+                               required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-transparent transition @error('email') border-red-500 @enderror"
+                               placeholder="contoh@email.com">
+                        @error('email')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">
+                            No. Telepon <span class="text-red-500">*</span>
+                        </label>
+                        <input type="tel"
+                               id="phone"
+                               name="phone"
+                               value="{{ old('phone') }}"
+                               required
+                               placeholder="081234567890"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-transparent transition @error('phone') border-red-500 @enderror">
+                        @error('phone')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="program" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Program yang Diminati
+                        </label>
+                        <select id="program"
+                                name="program"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-transparent transition">
+                            <option value="">Pilih Program (Opsional)</option>
+                            <option value="ak3" {{ old('program') == 'ak3' ? 'selected' : '' }}>Pelatihan AK3 Umum</option>
+                            <option value="bnsp" {{ old('program') == 'bnsp' ? 'selected' : '' }}>Sertifikasi BNSP</option>
+                            <option value="skp" {{ old('program') == 'skp' ? 'selected' : '' }}>Perpanjangan SKP</option>
+                            <option value="tot" {{ old('program') == 'tot' ? 'selected' : '' }}>Training of Trainer</option>
+                            <option value="other" {{ old('program') == 'other' ? 'selected' : '' }}>Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Pesan <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="message"
+                                  name="message"
+                                  rows="5"
+                                  required
+                                  placeholder="Tuliskan pesan atau pertanyaan Anda..."
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-maroon focus:border-transparent transition @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
+                        @error('message')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button type="submit"
+                            id="submitBtn"
+                            class="w-full bg-maroon text-white px-6 py-4 rounded-lg font-bold hover:bg-maroon-dark transition flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <span id="btnText">Kirim Pesan</span>
+                    </button>
+
+                    <p class="text-xs text-gray-500 text-center">
+                        This site is protected by reCAPTCHA and the Google
+                        <a href="https://policies.google.com/privacy" class="text-maroon underline" target="_blank">Privacy Policy</a> and
+                        <a href="https://policies.google.com/terms" class="text-maroon underline" target="_blank">Terms of Service</a> apply.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 
+@push('scripts')
+@push('scripts')
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText   = document.getElementById('btnText');
+    const siteKey   = "{{ config('services.recaptcha.site_key') }}";
 
+    submitBtn.disabled = true;
+    btnText.textContent = 'Mengirim...';
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute(siteKey, {action: 'contact'})
+        .then(function(token) {
+            console.log('Token generated:', token.substring(0, 20));
+
+            const form  = document.getElementById('contactForm');
+            const input = document.createElement('input');
+            input.type  = 'hidden';
+            input.name  = 'recaptcha_token';
+            input.value = token;
+            form.appendChild(input);
+
+            if (typeof trackClick === 'function') {
+                trackClick('contact_form', 'Submit - About Page');
+            }
+
+            form.submit();
+        })
+        .catch(function(err) {
+            console.error('reCAPTCHA error:', err);
+            alert('reCAPTCHA error. Silakan coba lagi.');
+            submitBtn.disabled = false;
+            btnText.textContent = 'Kirim Pesan';
+        });
+    });
+});
+</script>
+@endpush
+@endpush
 @endsection

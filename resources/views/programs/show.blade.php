@@ -104,36 +104,6 @@
                     @endif
                 </div>
 
-                {{-- Schedule --}}
-                @if($program->schedules->isNotEmpty())
-                <div class="relative inline-block mb-4">
-                    <button id="scheduleBtn"
-                            class="mx-auto px-4 py-2 rounded-lg border font-semibold bg-white transition hover:opacity-90"
-                            style="color: var(--maroon-dark);">
-                        Jadwal yang akan datang
-                    </button>
-
-                    <div id="scheduleDropdown"
-                        class="hidden absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border z-50">
-                        <div class="p-3 space-y-2 max-h-64 overflow-y-auto">
-                            @foreach ($program->schedules as $schedule)
-                                <div class="rounded-lg bg-gray-50 p-3">
-                                    {{ \Carbon\Carbon::parse($schedule->start_date)->translatedFormat('j F Y') }}
-                                    -
-                                    {{ \Carbon\Carbon::parse($schedule->end_date)->translatedFormat('j F Y') }}
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                document.getElementById('scheduleBtn').addEventListener('click', function() {
-                    document.getElementById('scheduleDropdown').classList.toggle('hidden');
-                });
-                </script>
-                @endif
-
                 {{-- CTA Buttons --}}
                 <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 
@@ -175,6 +145,36 @@
                         @endif
                     @endif
 
+                    {{-- Schedule --}}
+                    @if($program->schedules->isNotEmpty())
+                    <div class="relative inline-block mb-4">
+                        <button id="scheduleBtn"
+                                class="mx-auto px-4 py-2 rounded-lg border font-semibold bg-white transition hover:opacity-90"
+                                style="color: var(--maroon-dark);">
+                            Jadwal yang akan datang
+                        </button>
+
+                        <div id="scheduleDropdown"
+                            class="hidden absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border z-50">
+                            <div class="p-3 space-y-2 max-h-64 overflow-y-auto">
+                                @foreach ($program->schedules as $schedule)
+                                    <div class="rounded-lg bg-gray-50 p-3">
+                                        {{ \Carbon\Carbon::parse($schedule->start_date)->translatedFormat('j F Y') }}
+                                        -
+                                        {{ \Carbon\Carbon::parse($schedule->end_date)->translatedFormat('j F Y') }}
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                    document.getElementById('scheduleBtn').addEventListener('click', function() {
+                        document.getElementById('scheduleDropdown').classList.toggle('hidden');
+                    });
+                    </script>
+                    @endif
+
                 </div>
             </div>
 
@@ -192,7 +192,7 @@
                             style="background: rgba(255,255,255,0.1);">
                         <img src="{{ asset('storage/' . $program->image) }}"
                                 alt="{{ $program->title }}"
-                                class="h-full w-full object-cover opacity-90 sm:h-56 lg:h-40">
+                                class="h-full w-full object-cover opacity-90">
                     </div>
                     @else
                     <div class="w-full h-40 sm:h-56 opacity-90 rounded-xl" style="background: rgba(255,255,255,0.05);"></div>

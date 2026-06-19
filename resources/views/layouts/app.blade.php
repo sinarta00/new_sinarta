@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token">
     <link rel="icon" type="image/png" href="{{ asset('images/logo_sinarta.png') }}">
     <link rel="shortcut icon" href="{{ asset('images/logo_sinarta.png') }}">
     <title>{{ config('app.name', 'SinartaMJS') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- reCAPTCHA --}}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+    
     <style>
         :root {
             --maroon: #800020;
@@ -79,15 +84,13 @@
                         class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('programs*') ? 'text-maroon' : '' }}">
                             Program
                         </a>
+                        <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('gallery*') ? 'text-maroon' : '' }}">
+                            Galeri
+                        </a>
                         <a href="{{ route('instructor') }}"
                         onclick="trackClick('navbar', 'Menu - Instruktur');"
                         class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('instructor*') ? 'text-maroon' : '' }}">
                             Bergabung sebagai Instruktur
-                        </a>
-                        <a href="{{ route('contact') }}"
-                        onclick="trackClick('navbar', 'Menu - Hubungi Kami');"
-                        class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-medium">
-                            Hubungi Kami
                         </a>
                     </div>
 
@@ -117,15 +120,14 @@
                         class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('programs*') ? 'bg-gray-50 text-maroon' : '' }}">
                             Program
                         </a>
+                        <a href="{{ route('gallery') }}"
+                        class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('gallery*') ? 'bg-gray-50 text-maroon' : '' }}">
+                            Galeri
+                        </a>
                         <a href="{{ route('instructor') }}"
                         onclick="trackClick('navbar_mobile', 'Menu - Instruktur');"
                         class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('instructor*') ? 'bg-gray-50 text-maroon' : '' }}">
                             Bergabung sebagai Instruktur
-                        </a>
-                        <a href="{{ route('contact') }}"
-                        onclick="trackClick('navbar_mobile', 'Menu - Hubungi Kami');"
-                        class="bg-maroon text-white px-4 py-2 rounded-lg hover:bg-maroon-dark transition font-medium text-center">
-                            Hubungi Kami
                         </a>
                     </div>
                 </div>

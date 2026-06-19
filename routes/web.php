@@ -8,6 +8,7 @@ use App\Http\Controllers\ProgramPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\GalleryController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -16,7 +17,7 @@ Route::get('/layanan', [ServicePageController::class, 'index'])->name('services'
 Route::get('/layanan/{slug}', [ServicePageController::class, 'show'])->name('services.show');
 Route::get('/program', [ProgramPageController::class, 'index'])->name('programs');
 Route::get('/programs/{program}', [ProgramPageController::class, 'show'])->name('program.show');
-Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
+// Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 // Instructor Routes
 Route::get('/bergabung-sebagai-instruktur', [InstructorController::class, 'index'])->name('instructor');
@@ -25,6 +26,8 @@ Route::post('/bergabung-sebagai-instruktur', [InstructorController::class, 'stor
 Route::get('/form-alumni',        [AlumniController::class, 'showForm'])->name('alumni.form');
 Route::post('/form-alumni',       [AlumniController::class, 'submitForm'])->name('alumni.submit');
 Route::get('/form-alumni/sukses', [AlumniController::class, 'success'])->name('alumni.success');
+
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 use App\Helpers\AnalyticsHelper;
 

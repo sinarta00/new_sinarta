@@ -232,7 +232,7 @@
                     </svg>
                     Chat WhatsApp
                 </a>
-                <a href="{{ route('contact') }}" 
+                <a href="{{ route('about') . '#kontak' }}" 
                    onclick="trackClick('service_cta', 'Button - Formulir Kontak');"
                    class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-maroon transition">
                     Formulir Kontak
