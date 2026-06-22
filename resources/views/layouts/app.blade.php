@@ -90,7 +90,12 @@
                         <a href="{{ route('instructor') }}"
                         onclick="trackClick('navbar', 'Menu - Instruktur');"
                         class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('instructor*') ? 'text-maroon' : '' }}">
-                            Bergabung sebagai Instruktur
+                            Daftar Instruktur
+                        </a>
+                         <a href="{{ route('contact') }}"
+                        onclick="trackClick('navbar', 'Menu - Hubungi Kami');"
+                        class="bg-maroon text-white px-6 py-2 rounded-lg hover:bg-maroon-dark transition font-medium">
+                            Hubungi Kami
                         </a>
                     </div>
 
@@ -127,7 +132,12 @@
                         <a href="{{ route('instructor') }}"
                         onclick="trackClick('navbar_mobile', 'Menu - Instruktur');"
                         class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('instructor*') ? 'bg-gray-50 text-maroon' : '' }}">
-                            Bergabung sebagai Instruktur
+                            Daftar Instruktur
+                        </a>
+                         <a href="{{ route('contact') }}"
+                        onclick="trackClick('navbar_mobile', 'Menu - Hubungi Kami');"
+                        class="bg-maroon text-white px-4 py-2 rounded-lg hover:bg-maroon-dark transition font-medium text-center">
+                            Hubungi Kami
                         </a>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ Route::get('/layanan', [ServicePageController::class, 'index'])->name('services'
 Route::get('/layanan/{slug}', [ServicePageController::class, 'show'])->name('services.show');
 Route::get('/program', [ProgramPageController::class, 'index'])->name('programs');
 Route::get('/programs/{program}', [ProgramPageController::class, 'show'])->name('program.show');
-// Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
+Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 // Instructor Routes
 Route::get('/bergabung-sebagai-instruktur', [InstructorController::class, 'index'])->name('instructor');

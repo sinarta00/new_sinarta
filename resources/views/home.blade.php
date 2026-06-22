@@ -48,7 +48,7 @@
 
 .jumbotron-hashtags {
     color: #fff;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: 700;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -66,7 +66,7 @@
 
 .jumbotron-desc {
     color: rgba(255,255,255,0.92);
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     font-family: Arial, sans-serif;
     line-height: 1.7;
@@ -307,13 +307,13 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="jumbotron-content">
             <p class="jumbotron-hashtags">#BeCertified &nbsp; #BeSafe &nbsp; #BeReady</p>
             <h1 class="jumbotron-title">
-                BOOST YOUR SKILL<br>
-                WITH SINARTA
+                DEVELOPING TRAINING<br>
+                BUILDING A SAFETY CULTURE
             </h1>
             <p class="jumbotron-desc">
                 Menyediakan pelatihan dan sertifikasi profesional yang
-                dirancang untuk mempersiapkan tenaga kerja yang andal
-                dan siap menghadapi tantangan dunia kerja.
+                dirancang untuk mempersiapkan tenaga kerja andal
+                dan siap menghadapi tantangan dunia kerja di bidang Ahli K3 Umum.
             </p>
             <div class="jumbotron-buttons">
                 <a href="#jadwal"  class="btn-outline-white">Lihat Jadwal</a>
