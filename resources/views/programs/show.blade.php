@@ -207,10 +207,10 @@
     {{-- Fasilitas & Persyaratan --}}
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 my-4 lg:mt-0 mb-4">
         <div class="mb-8" style="color: var(--maroon);">
-            <p class="text-base sm:text-xl text-gray-700 font-medium">
+            <p class="text-base sm:text-xl text-gray-700 font-medium" style="color: var(--maroon);">
                 Mudah & Aman
             </p>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a6e] leading-tight">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight" style="color: var(--maroon);">
                 Fasilitas & Persyaratan
             </h2>
         </div>
