@@ -94,7 +94,7 @@
                 VISI
             </h2>
 
-            <p class="text-white text-xs md:text-lg leading-relaxed max-w-4xl mx-auto font-semibold align-middle ">
+            <p class="text-white text-xs md:text-lg leading-relaxed max-w-4xl mx-auto font-semibold align-middle capitalize">
                Menjadi lembaga pelatihan dan sertifikasi K3 terpercaya dan terdepan di Indonesia yang berkontribusi dalam menciptakan lingkungan kerja yang aman, sehat, dan produktif.
             </p>
         </div>

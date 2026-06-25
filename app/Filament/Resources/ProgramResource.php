@@ -54,8 +54,8 @@ class ProgramResource extends Resource
                             ->columnSpanFull(),
                         
                         Forms\Components\Textarea::make('features')
-                            ->label('Fitur/Materi (pisahkan dengan enter)')
-                            ->helperText('Setiap baris akan menjadi 1 poin fitur')
+                            ->label('Benefit')
+                            ->helperText('Setiap baris akan menjadi 1 poin benefit')
                             ->rows(5)
                             ->columnSpanFull(),
                         

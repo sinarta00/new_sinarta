@@ -211,17 +211,17 @@
                 Mudah & Aman
             </p>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight" style="color: var(--maroon);">
-                Fasilitas & Persyaratan
+                Benefit & Persyaratan
             </h2>
         </div>
 
         <div class="rounded-lg border border-gray-200 bg-white shadow-lg p-6 sm:p-8 lg:p-10">
             <div class="flex flex-col md:flex-row justify-center gap-8">
 
-                {{-- Fasilitas --}}
+                {{-- Benefit --}}
                 <div class="w-full md:w-1/2 md:pr-10 md:border-r md:border-gray-200">
                     <h3 class="text-lg sm:text-xl font-bold text-[#0f172a] mb-4">
-                        Fasilitas
+                        Benefit
                     </h3>
 
                     @php

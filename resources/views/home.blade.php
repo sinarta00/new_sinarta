@@ -56,7 +56,7 @@
 
 .jumbotron-title {
     color: #fff;
-    font-size: clamp(32px, 4.5vw, 56px);
+    font-size: clamp(30px, 4vw, 50px);
     font-weight: 900;
     line-height: 1.05;
     margin: 0;
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="jumbotron-desc">
                 Menyediakan pelatihan dan sertifikasi profesional yang
                 dirancang untuk mempersiapkan tenaga kerja andal
-                dan siap menghadapi tantangan dunia kerja di bidang Ahli K3 Umum.
+                dan siap menghadapi tantangan dunia kerja di bidang Ahli K3.
             </p>
             <div class="jumbotron-buttons">
                 <a href="#jadwal"  class="btn-outline-white">Lihat Jadwal</a>
