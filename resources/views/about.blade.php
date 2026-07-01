@@ -153,8 +153,25 @@
     </div>
 </section>
 
+{{-- Struktur Organisasi --}}
+<section class="py-20" style="background-color: #FFFAFA">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-animate="fade-up">
+            <div class="text-3xl  inline-block text-maroon font-bold mb-4">STRUKTUR ORGANISASI</div>
+        </div>
+
+        <div class="flex justify-center overflow-x-auto pb-4" data-animate="fade-up">
+            <div class="flex flex-col items-center min-w-max px-4">
+                @foreach($orgTree as $root)
+                    <x-org-node :node="$root" />
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Company Profile PDF -->
-<section class="py-12 bg-[#FFFAFA]">
+<section class="py-12 bg-white">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
             <h2 class="text-2xl md:text-3xl font-bold text-maroon">
@@ -172,7 +189,7 @@
 
         <div class="mx-full overflow-hidden">
             <iframe
-                src="{{ asset('files/company_profile.pdf') }}"
+                src="{{ asset('files/Company_Profile_2026.pdf') }}"
                 class="w-[70%] h-[900px] mx-auto border-0"
                 type="application/pdf">
             </iframe>

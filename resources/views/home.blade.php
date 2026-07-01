@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </h2>
                 <p class="text-gray-600 mb-3 leading-relaxed">
                     PT Sinarta Multi Jasa Sertifikasi adalah perusahaan penyedia layanan pelatihan dan sertifikasi K3
-                    yang telah dipercaya oleh ratusan perusahaan dan individu di seluruh Indonesia.
+                    yang telah dipercaya oleh beberapa perusahaan di Kalimantan Timur.
                 </p>
                 <p class="text-gray-600 mb-3 leading-relaxed">
                     Dengan instruktur bersertifikat, metode pembelajaran modern, dan fasilitas lengkap, kami
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="text-center mb-12">
             <span class="inline-block text-maroon font-semibold text-sm uppercase tracking-widest mb-2">LAYANAN KAMI</span>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Pelatihan Yang Bisa Kamu Daftar
+                Pelatihan Yang Bisa Kamu Ikuti
             </h2>
             <p class="text-gray-500 max-w-xl mx-auto text-sm">
                 Kami menyediakan berbagai program pelatihan dan sertifikasi K3 yang disesuaikan dengan kebutuhan industri
