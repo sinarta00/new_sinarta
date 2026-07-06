@@ -9,7 +9,7 @@
         <div class="bg-white rounded-2xl shadow-lg px-5 py-4 text-center min-w-[150px] z-10 border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-default">
             <img src="{{ asset('storage/'.$node->photo) }}"
                  alt="{{ $node->name }}"
-                 class="w-14 h-14 rounded-full mx-auto mb-2 object-cover bg-gray-200">
+                 class="w-20 h-20 rounded-full mx-auto mb-2 object-cover bg-gray-200">
             @if($node->name)
                 <p class="font-bold text-gray-900 text-sm">{{ $node->name }}</p>
             @endif

@@ -10,8 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 
 class OrganizationalStructureResource extends Resource
 {
@@ -32,20 +31,27 @@ class OrganizationalStructureResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('photo')
-                    ->label('Foto (opsional)')
-                    ->image()
-                    ->disk('public')
-                    ->directory('org-structure')
-                    ->visibility('public')
-                    ->avatar()
-                    ->imageEditor()                    // <-- aktifkan editor crop/resize
-                    ->imageEditorAspectRatios([        // opsional: batasi rasio crop
-                        '1:1',
-                        null,                          // biarkan bebas juga
-                    ])
-                    ->imageEditorViewportWidth('300')  // opsional: ukuran viewport editor
-                    ->imageEditorViewportHeight('300')
-                    ->nullable(),
+                     ->label('Foto')
+                        ->image()
+                        ->required()
+                        ->directory('gallery')          // disimpan di storage/app/public/gallery
+                        ->disk('public')
+                        ->imageEditor()                    // aktifkan editor crop/resize
+                        ->imageEditorAspectRatios([        // opsional: batasi rasio crop
+                            '16:9',
+                            '4:3', 
+                            '1:1',
+                            null,                          // biarkan bebas juga
+                        ])
+                        ->imageResizeMode('cover')
+                        ->imageResizeTargetWidth('1280')
+                        ->imageResizeTargetHeight('720')
+                        ->maxSize(5120)                 // 5 MB
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                        ->helperText('Format: JPG, PNG, WebP. Maks 5 MB.')
+                        ->deleteUploadedFileUsing(function ($file) {
+                            Storage::disk('public')->delete($file);
+                        }),
 
                 Forms\Components\Select::make('parent_id')
                     ->label('Atasan')

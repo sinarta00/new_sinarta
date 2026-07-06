@@ -60,13 +60,19 @@ class GalleryResource extends Resource
                         ->label('Foto')
                         ->image()
                         ->required()
-                        ->directory('gallery')          // disimpan di storage/app/public/gallery
+                        ->directory('gallery')          
                         ->disk('public')
+                        ->imageEditor()                 
+                        ->imageEditorAspectRatios([     
+                            '16:9',
+                            '4:3', 
+                            '1:1',
+                            null,                       
+                        ])
                         ->imageResizeMode('cover')
-                        ->imageCropAspectRatio('16:9')  // opsional — hapus jika ingin bebas
                         ->imageResizeTargetWidth('1280')
                         ->imageResizeTargetHeight('720')
-                        ->maxSize(5120)                 // 5 MB
+                        ->maxSize(5120)                 
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                         ->helperText('Format: JPG, PNG, WebP. Maks 5 MB.')
                         ->deleteUploadedFileUsing(function ($file) {
