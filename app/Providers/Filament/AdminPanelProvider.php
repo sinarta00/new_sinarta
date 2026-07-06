@@ -58,9 +58,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->widgets([
-                Widgets\AccountWidget::class,       // sudah ada, biarkan
-                // ... widget lain yang sudah ada ...
-                AlumniStatsOverview::class,         // ← tambahkan ini
+                Widgets\AccountWidget::class,       
+                AlumniStatsOverview::class,         
             ]);
     }
 }

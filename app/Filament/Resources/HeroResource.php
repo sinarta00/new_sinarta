@@ -17,6 +17,10 @@ class HeroResource extends Resource
     protected static ?string $navigationLabel = 'Hero Section';
     protected static ?string $navigationGroup = 'Content Management';
     protected static ?int $navigationSort = 1;
+    
+    // untuk mengatur apakah resource ini muncul di navigasi atau tidak, bisa diatur dengan properti berikut
+    protected static bool $shouldRegisterNavigation = false;
+
 
     public static function form(Form $form): Form
     {
