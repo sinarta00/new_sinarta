@@ -16,11 +16,11 @@
             <p class="text-maroon text-xs font-semibold mt-0.5">{{ $node->position }}</p>
         </div>
     @else
-        <div class="bg-maroon rounded-2xl shadow-lg px-5 py-4 text-center min-w-[150px] z-10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-default">
+        <div class="bg-white rounded-2xl shadow-lg px-5 py-4 text-center min-w-[150px] z-10 border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-default">
             @if($node->name)
                 <p class="font-bold text-white text-sm">{{ $node->name }}</p>
             @endif
-            <p class="text-yellow text-xs font-semibold mt-0.5">{{ $node->position }}</p>
+            <p class="text-maroon text-xs font-bold mt-0.5">{{ $node->position }}</p>
         </div>
     @endif
 

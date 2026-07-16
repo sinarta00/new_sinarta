@@ -24,6 +24,7 @@ class OrganizationalStructureResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->nullable()
                     ->maxLength(255)
                     ->label('Nama'),
                 Forms\Components\TextInput::make('position')
@@ -33,7 +34,8 @@ class OrganizationalStructureResource extends Resource
                 Forms\Components\FileUpload::make('photo')
                      ->label('Foto')
                         ->image()
-                        ->required()
+                        ->nullable()
+                        ->required(fn(callable $get) => filled($get('name')))
                         ->directory('gallery')          // disimpan di storage/app/public/gallery
                         ->disk('public')
                         ->imageEditor()                    // aktifkan editor crop/resize
