@@ -10,7 +10,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use App\Filament\Resources\ProgramResource\RelationManagers\SchedulesRelationManager;
-use Filament\Forms\Components\FileUpload;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ProgramResource extends Resource
 {
@@ -19,6 +20,18 @@ class ProgramResource extends Resource
     protected static ?string $navigationLabel = 'Program Pelatihan';
     protected static ?string $navigationGroup = 'Content Management';
     protected static ?int $navigationSort = 3;
+
+    protected static function generateFileName(TemporaryUploadedFile $file): string {
+        $filename = Str::slug(
+            pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)
+        );
+
+        return now()->format('YmdHis')
+            . '_' . $filename
+            . '_' . Str::lower(Str::random(4))
+            . '.' 
+            . $file->getClientOriginalExtension();
+    }
 
     public static function form(Form $form): Form
     {
@@ -70,6 +83,9 @@ class ProgramResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('programs')
+                            ->getUploadedFileNameForStorageUsing(function ($file) {
+                               fn (TemporaryUploadedFile $file) => self::generateFileName($file);
+                            })
                             ->maxSize(2048)
                             ->columnSpanFull(),
 
@@ -78,6 +94,9 @@ class ProgramResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('programs/benefit-images')
+                             ->getUploadedFileNameForStorageUsing(function ($file) {
+                                fn (TemporaryUploadedFile $file) => self::generateFileName($file);
+                            })
                             ->maxSize(2048)
                             ->columnSpanFull(),
                         
@@ -85,6 +104,9 @@ class ProgramResource extends Resource
                             ->label('Proposal (PDF)')
                              ->acceptedFileTypes(['application/pdf'])
                             ->directory('program-pdfs')
+                            ->getUploadedFileNameForStorageUsing(function ($file) {
+                               fn (TemporaryUploadedFile $file) => self::generateFileName($file);
+                            })
                             ->maxSize(15000) // 5MB
                             ->downloadable()
                             ->previewable(false)

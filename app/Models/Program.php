@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 
 class Program extends Model
@@ -72,5 +73,26 @@ class Program extends Model
         if ($prices->count() === 1) return 'Rp ' . number_format($prices->first(), 0, ',', '.');
         return 'Rp ' . number_format($prices->min(), 0, ',', '.') . ' – Rp ' . number_format($prices->max(), 0, ',', '.');
     }
+
+    protected static function booted()
+{
+    static::deleting(function (Program $program) {
+        $fileFields = ['image', 'benefit_image', 'pdf_file', 'registration_flow_image'];
+        foreach ($fileFields as $field) {
+            if ($program->{$field}) {
+                Storage::disk('public')->delete($program->{$field});
+            }
+        }
+    });
+
+    static::updating(function (Program $program) {
+        $fileFields = ['image', 'benefit_image', 'pdf_file', 'registration_flow_image'];
+        foreach ($fileFields as $field) {
+            if ($program->isDirty($field) && $program->getOriginal($field)) {
+                Storage::disk('public')->delete($program->getOriginal($field));
+            }
+        }
+    });
+}
 
 }
