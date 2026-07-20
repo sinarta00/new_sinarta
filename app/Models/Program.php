@@ -19,6 +19,7 @@ class Program extends Model
         'price',
         'discount',
         'image',
+        'benefit_image',
         'registration_link',
         'category',
         'is_active',

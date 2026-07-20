@@ -72,6 +72,14 @@ class ProgramResource extends Resource
                             ->directory('programs')
                             ->maxSize(2048)
                             ->columnSpanFull(),
+
+                        Forms\Components\FileUpload::make('benefit_image')
+                            ->label('Gambar Benefit')
+                            ->image()
+                            ->disk('public')
+                            ->directory('programs/benefit-images')
+                            ->maxSize(2048)
+                            ->columnSpanFull(),
                         
                         Forms\Components\FileUpload::make('pdf_file')
                             ->label('Proposal (PDF)')

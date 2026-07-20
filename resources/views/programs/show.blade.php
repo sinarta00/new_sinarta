@@ -204,6 +204,16 @@
         </div>
     </div>
 
+    @if ($program->benefit_image ?? null)
+         <div class="rounded-lg  bg-transparent  p-6 sm:p-8 lg:p-10">
+            <img
+                src="{{ asset('storage/' . $program->benefit_image) }}"
+                alt="Benefit {{ $program->title }}"
+                class="w-full h-auto rounded-xl object-contain"
+            >
+        </div>
+    @endif
+
     {{-- Fasilitas & Persyaratan --}}
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 my-4 lg:mt-0 mb-4">
         <div class="mb-8" style="color: var(--maroon);">
@@ -299,12 +309,12 @@
 
     {{-- Alur Registrasi --}}
     @if($program->registration_flow_image ?? null)
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-10 lg:mt-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-10 lg:mt-12 mb-10">
         <div class="mb-8" style="color: var(--maroon)">
             <p class="text-base sm:text-xl text-gray-700 font-medium">
                 Langkah demi Langkah
             </p>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a6e] leading-tight">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-maroon leading-tight">
                 Alur Registrasi
             </h2>
         </div>
