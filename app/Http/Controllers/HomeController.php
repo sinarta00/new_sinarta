@@ -19,7 +19,7 @@ class HomeController extends Controller
         $heroes       = Hero::where('is_active', true)->orderBy('order')->get();
         $services     = Service::where('is_active', true)->orderBy('order')->get();
         $programs     = Program::where('is_active', true)->orderBy('order')->limit(6)->get();
-        $testimonials = Testimonial::where('is_active', true)->latest()->limit(6)->get();
+        $testimonials = Testimonial::where('is_active', true)->latest()->get();
         $partners     = Partner::where('is_active', true)->orderBy('order')->get();
         $popup        = Popup::active()->orderBy('order')->first();
 
