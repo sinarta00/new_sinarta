@@ -143,7 +143,7 @@
     }
 
     .jumbotron-title {
-        font-size: 28px;
+        font-size: 18px;
     }
 
     .jumbotron-desc {
@@ -153,6 +153,12 @@
 
     .jumbotron-hashtags {
         font-size: 16px;
+    }
+
+    .btn-outline-white{
+        padding-block: 5px;
+        padding-inline: 10px;
+        font-size: 12px;
     }
 
 }

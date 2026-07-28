@@ -160,8 +160,8 @@
             <div class="text-3xl  inline-block text-maroon font-bold mb-4">STRUKTUR ORGANISASI</div>
         </div>
 
-        <div class="flex justify-center overflow-x-auto pb-4" data-animate="fade-up">
-            <div class="flex flex-col items-center min-w-max px-4">
+        <div class="flex justify-start overflow-x-auto pb-4" data-animate="fade-up">
+            <div class="flex flex-col items-center min-w-max px-4 mx-auto">
                 @foreach($orgTree as $root)
                     <x-org-node :node="$root" />
                 @endforeach

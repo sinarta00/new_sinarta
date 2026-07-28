@@ -131,7 +131,7 @@
 
         {{-- Tombol tutup --}}
         <button onclick="closeLightbox()"
-                class="absolute -top-7 right-20 text-white/70 hover:text-white transition text-4xl leading-none"
+                class="absolute right-5 -top-[25px] text-white/70 hover:text-white transition text-4xl leading-none"
                 aria-label="Tutup">
             &times;
         </button>
@@ -141,7 +141,7 @@
             <img id="lightbox-img"
                  src=""
                  alt=""
-                 class="max-h-[75vh] w-3/4 rounded-xl object-contain shadow-2xl">
+                 class="max-h-[50vh] w-3/4 rounded-xl object-contain shadow-2xl">
         </div>
 
         {{-- Caption --}}
