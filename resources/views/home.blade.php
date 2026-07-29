@@ -612,7 +612,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                        class="w-full text-center bg-maroon text-white py-2 font-semibold text-sm hover:bg-maroon-dark transition-colors duration-200">
                                         Daftar Pelatihan Sekarang
                                     </a>
-                                    <a href="{{ route('program.show', $program->id) }}"
+                                    <a href="{{ route('programs.show', $program->id) }}"
                                        onclick="trackClick('program_card', 'Detail - {{ addslashes($program->title) }}');"
                                        class="w-full text-center bg-yellow text-maroon py-2 font-semibold text-sm hover:bg-yellow-light transition-colors duration-200">
                                         Detail Pelatihan

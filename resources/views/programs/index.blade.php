@@ -5,7 +5,7 @@
 <!-- Filter & Search -->
 <section class="py-8 bg-white border-b">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <form method="GET" action="{{ route('programs') }}" class="flex flex-col md:flex-row gap-4">
+        <form method="GET" action="{{ route('programs.index') }}" class="flex flex-col md:flex-row gap-4">
             <!-- Search -->
             <div class="flex-1">
                 <input type="text" 
@@ -124,7 +124,7 @@
                             class="w-full text-center bg-maroon text-white py-2 font-semibold text-sm hover:bg-maroon-dark transition-colors duration-200">
                                 Daftar Pelatihan Sekarang
                             </a>
-                            <a href="{{ route('program.show', $program->id) }}"
+                            <a href="{{ route('programs.show', $program->id) }}"
                             onclick="trackClick('program_card', 'Detail - {{ addslashes($program->title) }}');"
                             class="w-full text-center bg-yellow text-maroon py-2 font-semibold text-sm hover:bg-yellow-light transition-colors duration-200">
                                 Detail Pelatihan

@@ -79,9 +79,9 @@
                         class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('about') ? 'text-maroon' : '' }}">
                             Tentang
                         </a>
-                        <a href="{{ route('programs') }}"
+                        <a href="{{ route('programs.index') }}"
                         onclick="trackClick('navbar', 'Menu - Program');"
-                        class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('programs*') ? 'text-maroon' : '' }}">
+                        class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('programs.*') ? 'text-maroon' : '' }}">
                             Program
                         </a>
                         <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-maroon font-medium transition {{ request()->routeIs('gallery*') ? 'text-maroon' : '' }}">
@@ -120,9 +120,9 @@
                         class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('about') ? 'bg-gray-50 text-maroon' : '' }}">
                             Tentang
                         </a>
-                        <a href="{{ route('programs') }}"
+                        <a href="{{ route('programs.index') }}"
                         onclick="trackClick('navbar_mobile', 'Menu - Program');"
-                        class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('programs*') ? 'bg-gray-50 text-maroon' : '' }}">
+                        class="text-gray-700 hover:text-maroon font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition {{ request()->routeIs('programs.*') ? 'bg-gray-50 text-maroon' : '' }}">
                             Program
                         </a>
                         <a href="{{ route('gallery') }}"
