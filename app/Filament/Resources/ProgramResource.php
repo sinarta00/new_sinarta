@@ -21,7 +21,8 @@ class ProgramResource extends Resource
     protected static ?string $navigationGroup = 'Content Management';
     protected static ?int $navigationSort = 3;
 
-    protected static function generateFileName(TemporaryUploadedFile $file): string {
+    protected static function generateFileName(TemporaryUploadedFile $file): string
+    {
         $filename = Str::slug(
             pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)
         );
@@ -29,7 +30,7 @@ class ProgramResource extends Resource
         return now()->format('YmdHis')
             . '_' . $filename
             . '_' . Str::lower(Str::random(4))
-            . '.' 
+            . '.'
             . $file->getClientOriginalExtension();
     }
 
@@ -44,7 +45,7 @@ class ProgramResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        
+
                         Forms\Components\Select::make('category')
                             ->label('Kategori')
                             ->options([
@@ -55,36 +56,36 @@ class ProgramResource extends Resource
                                 'OTHER' => 'Lainnya',
                             ])
                             ->required(),
-                        
+
                         Forms\Components\TextInput::make('duration')
                             ->label('Durasi')
                             ->helperText('Contoh: 12 Hari, 3-5 Hari')
                             ->maxLength(255),
-                        
+
                         Forms\Components\RichEditor::make('description')
                             ->label('Deskripsi Program')
                             ->required()
                             ->columnSpanFull(),
-                        
+
                         Forms\Components\Textarea::make('features')
                             ->label('Benefit')
                             ->helperText('Setiap baris akan menjadi 1 poin benefit')
                             ->rows(5)
                             ->columnSpanFull(),
-                        
+
                         Forms\components\Textarea::make('requirements')
                             ->label('Persyaratan')
                             ->helperText('Setiap baris akan menjadi 1 poin persyaratan')
                             ->rows(5)
                             ->columnSpanFull(),
-                        
+
                         Forms\Components\FileUpload::make('image')
                             ->label('Gambar Program')
                             ->image()
                             ->disk('public')
                             ->directory('programs')
                             ->getUploadedFileNameForStorageUsing(function ($file) {
-                               fn (TemporaryUploadedFile $file) => self::generateFileName($file);
+                                fn(TemporaryUploadedFile $file) => self::generateFileName($file);
                             })
                             ->maxSize(2048)
                             ->columnSpanFull(),
@@ -94,20 +95,20 @@ class ProgramResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('programs/benefit-images')
-                             ->getUploadedFileNameForStorageUsing(function ($file) {
-                                fn (TemporaryUploadedFile $file) => self::generateFileName($file);
+                            ->getUploadedFileNameForStorageUsing(function ($file) {
+                                fn(TemporaryUploadedFile $file) => self::generateFileName($file);
                             })
                             ->maxSize(2048)
                             ->columnSpanFull(),
-                        
+
                         Forms\Components\FileUpload::make('pdf_file')
                             ->label('Proposal (PDF)')
-                             ->acceptedFileTypes(['application/pdf'])
+                            ->acceptedFileTypes(['application/pdf'])
                             ->directory('program-pdfs')
-                            ->getUploadedFileNameForStorageUsing(function ($file) {
-                               fn (TemporaryUploadedFile $file) => self::generateFileName($file);
+                            ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file) {
+                                return self::generateFileName($file);
                             })
-                            ->maxSize(15000) // 5MB
+                            ->maxSize(15000)
                             ->downloadable()
                             ->previewable(false)
                             ->nullable(),
@@ -122,56 +123,56 @@ class ProgramResource extends Resource
                             ->nullable()
                     ]),
 
-                    Forms\Components\Section::make('Harga & Varian')
-                        ->description('Tambahkan 1 varian saja jika program tidak berjenis (kosongkan kolom Tipe)')
-                        ->schema([
-                            Forms\Components\Repeater::make('variants')
-                                ->relationship('variants')
-                                ->schema([
-                                    Forms\Components\TextInput::make('name')
-                                        ->label('Tipe Varian')
-                                        ->placeholder('Personal / Utusan Perusahaan / Online / Offline')
-                                        ->helperText('Kosongkan jika program hanya 1 harga')
-                                        ->nullable(),
+                Forms\Components\Section::make('Harga & Varian')
+                    ->description('Tambahkan 1 varian saja jika program tidak berjenis (kosongkan kolom Tipe)')
+                    ->schema([
+                        Forms\Components\Repeater::make('variants')
+                            ->relationship('variants')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Tipe Varian')
+                                    ->placeholder('Personal / Utusan Perusahaan / Online / Offline')
+                                    ->helperText('Kosongkan jika program hanya 1 harga')
+                                    ->nullable(),
 
-                                    Forms\Components\TextInput::make('price')
-                                        ->label('Harga (Rp)')
-                                        ->numeric()
-                                        ->prefix('Rp')
-                                        ->required(),
+                                Forms\Components\TextInput::make('price')
+                                    ->label('Harga (Rp)')
+                                    ->numeric()
+                                    ->prefix('Rp')
+                                    ->required(),
 
-                                    Forms\Components\TextInput::make('discount')
-                                        ->label('Diskon')
-                                        ->numeric()
-                                        ->suffix('%')
-                                        ->minValue(0)
-                                        ->maxValue(100)
-                                        ->nullable(),
+                                Forms\Components\TextInput::make('discount')
+                                    ->label('Diskon')
+                                    ->numeric()
+                                    ->suffix('%')
+                                    ->minValue(0)
+                                    ->maxValue(100)
+                                    ->nullable(),
 
-                                    Forms\Components\TextInput::make('duration')
-                                        ->label('Durasi')
-                                        ->placeholder('Contoh: 12 Hari')
-                                        ->helperText('Kosongkan jika sama dengan durasi program')
-                                        ->nullable(),
+                                Forms\Components\TextInput::make('duration')
+                                    ->label('Durasi')
+                                    ->placeholder('Contoh: 12 Hari')
+                                    ->helperText('Kosongkan jika sama dengan durasi program')
+                                    ->nullable(),
 
-                                    Forms\Components\TextInput::make('registration_link')
-                                        ->label('Link Pendaftaran')
-                                        ->url()
-                                        ->placeholder('https://wa.me/...')
-                                        ->nullable()
-                                        ->columnSpanFull(),
+                                Forms\Components\TextInput::make('registration_link')
+                                    ->label('Link Pendaftaran')
+                                    ->url()
+                                    ->placeholder('https://wa.me/...')
+                                    ->nullable()
+                                    ->columnSpanFull(),
 
-                                    Forms\Components\Toggle::make('is_active')
-                                        ->label('Aktif')
-                                        ->default(true),
-                                ])
-                                ->columns(2)
-                                ->orderColumn('order')
-                                ->addActionLabel('+ Tambah Varian')
-                                ->defaultItems(1)        // otomatis 1 baris saat create baru
-                                ->columnSpanFull(),
-                        ]),
-                
+                                Forms\Components\Toggle::make('is_active')
+                                    ->label('Aktif')
+                                    ->default(true),
+                            ])
+                            ->columns(2)
+                            ->orderColumn('order')
+                            ->addActionLabel('+ Tambah Varian')
+                            ->defaultItems(1)        // otomatis 1 baris saat create baru
+                            ->columnSpanFull(),
+                    ]),
+
 
                 Forms\Components\Section::make('Pengaturan Tampilan')
                     ->schema([
@@ -179,7 +180,7 @@ class ProgramResource extends Resource
                             ->label('Aktif')
                             ->default(true)
                             ->inline(false),
-                        
+
                         Forms\Components\TextInput::make('order')
                             ->label('Urutan Tampil')
                             ->numeric()
@@ -197,34 +198,34 @@ class ProgramResource extends Resource
                 Tables\Columns\TextColumn::make('order')
                     ->label('Urutan')
                     ->sortable(),
-                
+
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Gambar')
                     ->disk('public')
                     ->height(50),
-                
+
                 Tables\Columns\TextColumn::make('title')
                     ->label('Nama Program')
                     ->searchable()
                     ->limit(30),
-                
+
                 Tables\Columns\TextColumn::make('category')
                     ->label('Kategori')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'KEMNAKER' => 'success',
                         'BNSP' => 'info',
                         'SKP' => 'warning',
                         'TOT' => 'danger',
                         default => 'gray',
                     }),
-                
+
                 Tables\Columns\TextColumn::make('duration')
                     ->label('Durasi'),
-                
+
                 Tables\Columns\TextColumn::make('price_range')
                     ->label('Harga')
-                    ->getStateUsing(fn ($record) => $record->price_range)
+                    ->getStateUsing(fn($record) => $record->price_range)
                     ->sortable(false),
 
                 Tables\Columns\TextColumn::make('variants_count')
@@ -240,11 +241,11 @@ class ProgramResource extends Resource
                     ->falseIcon('heroicon-o-x-mark')
                     ->trueColor('success')
                     ->falseColor('gray'),
-                
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Status')
                     ->boolean(),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
@@ -261,7 +262,7 @@ class ProgramResource extends Resource
                         'TOT' => 'TOT',
                         'OTHER' => 'Lainnya',
                     ]),
-                
+
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Status')
                     ->placeholder('Semua')
@@ -290,9 +291,9 @@ class ProgramResource extends Resource
     }
 
     public static function getRelations(): array
-{
-    return [
-        SchedulesRelationManager::class,
-    ];
-}
+    {
+        return [
+            SchedulesRelationManager::class,
+        ];
+    }
 }
